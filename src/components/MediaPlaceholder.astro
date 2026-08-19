@@ -1,0 +1,33 @@
+---
+interface Props {
+	label?: string;
+	variant?: 'water' | 'leaf' | 'sand';
+	shape?: 'landscape' | 'portrait' | 'wide';
+}
+
+const { label = 'Bildmotiv folgt', variant = 'water', shape = 'landscape' } = Astro.props;
+const backgrounds = {
+	water: 'bg-pond-200',
+	leaf: 'bg-reed-200',
+	sand: 'bg-sand-200',
+};
+const shapes = {
+	landscape: 'aspect-[4/3]',
+	portrait: 'aspect-[5/6]',
+	wide: 'min-h-56 aspect-[16/7]',
+};
+---
+
+<div
+	class:list={['relative isolate w-full overflow-hidden rounded-3xl', backgrounds[variant], shapes[shape]]}
+	role="img"
+	aria-label={label}
+>
+	<div class="absolute right-[12%] top-[12%] size-24 rounded-full bg-sand-50/60"></div>
+	<div class="absolute -right-[15%] bottom-[26%] h-[28%] w-[88%] -rotate-6 rounded-[50%] bg-reed-500/85"></div>
+	<div class="absolute bottom-[3%] left-[7%] right-[7%] h-[48%] rounded-[50%_50%_18%_22%] bg-gradient-to-br from-pond-300 to-pond-700"></div>
+	<div class="absolute -bottom-[13%] -left-[10%] z-10 h-[30%] w-[86%] rotate-6 rounded-[50%] bg-sand-300"></div>
+	<span class="absolute bottom-5 left-5 z-20 rounded-full bg-white/85 px-3 py-2 text-xs font-bold tracking-wider text-pond-900 uppercase backdrop-blur-sm">
+		{label}
+	</span>
+</div>

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Compact Teaching"
+  short_description: "Keep technical teaching concise"
+  default_prompt: "Use $compact-teaching with $senior-engineering-stance to explain this technical task briefly while preserving the essential reasoning and takeaway."

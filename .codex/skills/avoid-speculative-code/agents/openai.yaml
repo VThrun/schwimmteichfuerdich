@@ -1,0 +1,4 @@
+interface:
+  display_name: "Avoid Speculative Code"
+  short_description: "Keep changes focused on proven requirements"
+  default_prompt: "Use $avoid-speculative-code to keep this implementation focused on proven requirements and avoid unjustified guards, fallbacks, branches, or abstractions."

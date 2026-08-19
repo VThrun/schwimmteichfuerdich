@@ -1,0 +1,4 @@
+interface:
+  display_name: "Maintain Project Context"
+  short_description: "Keep durable repository context accurate"
+  default_prompt: "Use $maintain-project-context to update the canonical agent context with verified, reusable architecture, workflow, command, or convention changes."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Critical Thinking Before Action"
+  short_description: "Preflight risky or ambiguous work"
+  default_prompt: "Use $critical-thinking-before-action to assess this materially risky or ambiguous task and ask for approval only where a real decision or authorization is missing."

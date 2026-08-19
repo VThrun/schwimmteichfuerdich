@@ -1,0 +1,4 @@
+interface:
+  display_name: "Framework-First Simplicity"
+  short_description: "Prefer native framework capabilities"
+  default_prompt: "Use $framework-first-simplicity to solve this task with native primitives and established project infrastructure before adding custom layers."

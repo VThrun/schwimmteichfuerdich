@@ -1,0 +1,4 @@
+interface:
+  display_name: "Senior Engineering Stance"
+  short_description: "Apply senior engineering judgment"
+  default_prompt: "Use $senior-engineering-stance to assess this non-trivial engineering task with evidence, maintainable tradeoffs, and proportional verification."

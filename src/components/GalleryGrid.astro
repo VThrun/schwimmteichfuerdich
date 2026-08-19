@@ -1,0 +1,153 @@
+---
+interface Props {
+	id: string;
+	count?: number;
+	compact?: boolean;
+}
+
+const { id, count = 6, compact = false } = Astro.props;
+const variants = ['water', 'leaf', 'sand'] as const;
+const backgrounds = {
+	water: 'bg-pond-200',
+	leaf: 'bg-reed-200',
+	sand: 'bg-sand-200',
+};
+const mosaicClasses = [
+	'col-span-2 row-span-2',
+	'col-span-1 row-span-1',
+	'col-span-1 row-span-1',
+	'col-span-2 row-span-1',
+	'col-span-1 row-span-2',
+	'col-span-1 row-span-2',
+	'col-span-2 row-span-1',
+	'col-span-1 row-span-1',
+	'col-span-1 row-span-1',
+	'col-span-2 row-span-2',
+	'col-span-2 row-span-1',
+	'col-span-2 row-span-1',
+];
+const items = Array.from({ length: count }, (_, index) => ({
+	index,
+	label: `Projektbild ${String(index + 1).padStart(2, '0')} wird ergänzt`,
+	variant: variants[index % variants.length],
+}));
+---
+
+<div class="gallery" data-gallery={id}>
+	<div
+		class:list={[
+			compact
+				? 'grid gap-4 sm:grid-cols-2 lg:grid-cols-3'
+				: 'grid auto-rows-[8rem] grid-cols-2 gap-4 sm:auto-rows-[11rem] md:grid-cols-4 lg:auto-rows-[13rem]',
+		]}
+	>
+		{items.map((item) => (
+			<button
+				type="button"
+				class:list={[
+					'group relative isolate min-h-44 overflow-hidden rounded-2xl text-left transition duration-300 hover:-translate-y-1 hover:shadow-lg focus-visible:ring-3 focus-visible:ring-sand-400 focus-visible:outline-hidden',
+					backgrounds[item.variant],
+					compact ? 'aspect-[4/3]' : mosaicClasses[item.index % mosaicClasses.length],
+				]}
+				data-gallery-trigger
+				data-index={item.index}
+				data-variant={item.variant}
+				aria-label={`${item.label} groß anzeigen`}
+			>
+				<span class="absolute right-[10%] top-[10%] size-16 rounded-full bg-sand-50/70" aria-hidden="true"></span>
+				<span class="absolute -right-[20%] bottom-[24%] h-[34%] w-[105%] -rotate-6 rounded-[50%] bg-reed-500/80 transition duration-500 group-hover:-translate-y-1" aria-hidden="true"></span>
+				<span class="absolute bottom-0 left-[5%] right-[5%] h-[48%] rounded-[50%_50%_12%_12%] bg-gradient-to-br from-pond-300 to-pond-700" aria-hidden="true"></span>
+				<span class="absolute bottom-4 left-4 right-4 rounded-xl bg-white/85 px-3 py-2 text-xs font-bold tracking-wider text-pond-900 uppercase backdrop-blur-sm">
+					{item.label}
+				</span>
+			</button>
+		))}
+	</div>
+
+	<dialog
+		class="m-auto w-[min(92vw,64rem)] max-w-none overflow-hidden rounded-3xl bg-white p-0 text-stone-800 shadow-2xl backdrop:bg-pond-950/80"
+		data-gallery-dialog
+		aria-labelledby={`${id}-dialog-title`}
+	>
+		<div class="relative">
+			<div
+				class="relative aspect-[16/10] overflow-hidden bg-pond-200 data-[variant=leaf]:bg-reed-200 data-[variant=sand]:bg-sand-200"
+				data-gallery-visual
+				data-variant="water"
+				role="img"
+				aria-label="Vergrößerter Bildplatzhalter"
+			>
+				<div class="absolute right-[12%] top-[12%] size-28 rounded-full bg-sand-50/70"></div>
+				<div class="absolute -right-[15%] bottom-[26%] h-[28%] w-[88%] -rotate-6 rounded-[50%] bg-reed-500/85"></div>
+				<div class="absolute bottom-[3%] left-[7%] right-[7%] h-[48%] rounded-[50%_50%_18%_22%] bg-gradient-to-br from-pond-300 to-pond-700"></div>
+				<div class="absolute -bottom-[13%] -left-[10%] h-[30%] w-[86%] rotate-6 rounded-[50%] bg-sand-300"></div>
+			</div>
+
+			<form method="dialog" class="absolute right-4 top-4">
+				<button type="submit" class="flex size-11 items-center justify-center rounded-full bg-white/90 text-2xl text-pond-950 shadow-sm transition hover:bg-white" aria-label="Galerie schließen">×</button>
+			</form>
+
+			<button type="button" class="absolute left-4 top-1/2 flex size-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-2xl text-pond-950 shadow-sm transition hover:bg-white" data-gallery-previous aria-label="Vorheriges Bild">←</button>
+			<button type="button" class="absolute right-4 top-1/2 flex size-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-2xl text-pond-950 shadow-sm transition hover:bg-white" data-gallery-next aria-label="Nächstes Bild">→</button>
+		</div>
+		<div class="flex items-center justify-between gap-6 px-5 py-4 sm:px-7">
+			<h2 id={`${id}-dialog-title`} class="font-display text-xl text-pond-950" data-gallery-label aria-live="polite">Projektbild wird ergänzt</h2>
+			<p class="shrink-0 text-sm font-semibold text-stone-500" data-gallery-counter></p>
+		</div>
+	</dialog>
+</div>
+
+<script>
+	const initializeGalleries = () => {
+		document.querySelectorAll<HTMLElement>('[data-gallery]').forEach((gallery) => {
+			if (gallery.dataset.initialized === 'true') return;
+			gallery.dataset.initialized = 'true';
+
+			const triggers = Array.from(gallery.querySelectorAll<HTMLButtonElement>('[data-gallery-trigger]'));
+			const dialog = gallery.querySelector<HTMLDialogElement>('[data-gallery-dialog]');
+			const label = gallery.querySelector<HTMLElement>('[data-gallery-label]');
+			const counter = gallery.querySelector<HTMLElement>('[data-gallery-counter]');
+			const visual = gallery.querySelector<HTMLElement>('[data-gallery-visual]');
+			const previous = gallery.querySelector<HTMLButtonElement>('[data-gallery-previous]');
+			const next = gallery.querySelector<HTMLButtonElement>('[data-gallery-next]');
+
+			if (!dialog || !label || !counter || !visual || !previous || !next || triggers.length === 0) return;
+
+			let activeIndex = 0;
+			let lastTrigger: HTMLButtonElement | null = null;
+
+			const showItem = (index: number) => {
+				activeIndex = (index + triggers.length) % triggers.length;
+				const trigger = triggers[activeIndex];
+				label.textContent = trigger.querySelector('span:last-child')?.textContent?.trim() ?? 'Projektbild wird ergänzt';
+				counter.textContent = `${activeIndex + 1} / ${triggers.length}`;
+				visual.dataset.variant = trigger.dataset.variant ?? 'water';
+			};
+
+			triggers.forEach((trigger, index) => {
+				trigger.addEventListener('click', () => {
+					lastTrigger = trigger;
+					showItem(index);
+					dialog.showModal();
+				});
+			});
+
+			previous.addEventListener('click', () => showItem(activeIndex - 1));
+			next.addEventListener('click', () => showItem(activeIndex + 1));
+			dialog.addEventListener('keydown', (event) => {
+				if (event.key === 'ArrowLeft') showItem(activeIndex - 1);
+				if (event.key === 'ArrowRight') showItem(activeIndex + 1);
+			});
+			dialog.addEventListener('click', (event) => {
+				if (event.target === dialog) dialog.close();
+			});
+			dialog.addEventListener('close', () => lastTrigger?.focus());
+		});
+	};
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initializeGalleries);
+	} else {
+		initializeGalleries();
+	}
+</script>

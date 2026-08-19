@@ -1,0 +1,71 @@
+---
+import BrandLogo from './BrandLogo.astro';
+import ButtonLink from './ui/ButtonLink.astro';
+
+const links = [
+	{ href: '/', label: 'Start' },
+	{ href: '/angebote/', label: 'Angebote' },
+	{ href: '/do-it-yourself/', label: 'DIY' },
+	{ href: '/galerie/', label: 'Galerie' },
+	{ href: '/ueber-uns/', label: 'Über uns' },
+	{ href: '/kontakt/', label: 'Kontakt' },
+];
+
+const currentPath = Astro.url.pathname;
+const isActive = (href: string) =>
+	href === '/' ? currentPath === href : currentPath.startsWith(href);
+---
+
+<header class="sticky inset-x-0 top-4 z-50 flex w-full flex-wrap text-sm lg:flex-nowrap lg:justify-start">
+	<nav
+		class="relative mx-2 w-full rounded-[2.25rem] border border-white/60 bg-sand-50/90 px-4 py-3 shadow-sm backdrop-blur-md lg:flex lg:items-center lg:justify-between lg:px-6 lg:py-2 xl:mx-auto xl:max-w-[85rem] xl:px-8"
+		aria-label="Hauptnavigation"
+	>
+		<div class="flex items-center justify-between">
+			<a
+				class="flex-none rounded-lg ring-pond-600 outline-hidden focus-visible:ring-3"
+				href="/"
+				aria-label="Schwimmteich für Dich – Startseite"
+			>
+				<BrandLogo class="h-auto w-38 sm:w-44" />
+			</a>
+
+			<div class="ml-auto lg:hidden">
+				<button
+					type="button"
+					class="hs-collapse-toggle flex size-10 items-center justify-center rounded-full text-pond-900 transition duration-300 hover:bg-pond-100 focus-visible:ring-3 focus-visible:ring-sand-400 focus-visible:outline-hidden"
+					data-hs-collapse="#site-navigation"
+					aria-controls="site-navigation"
+					aria-label="Navigation ein- oder ausblenden"
+				>
+					<svg class="hs-collapse-open:hidden size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+						<path d="M4 6h16M4 12h16M4 18h16"></path>
+					</svg>
+					<svg class="hs-collapse-open:block hidden size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+						<path d="m6 6 12 12M18 6 6 18"></path>
+					</svg>
+				</button>
+			</div>
+		</div>
+
+		<div id="site-navigation" class="hs-collapse hidden grow basis-full overflow-hidden transition-all duration-300 lg:block">
+			<div class="mt-5 flex flex-col gap-y-1 lg:mt-0 lg:flex-row lg:items-center lg:justify-end lg:gap-x-1 lg:ps-7">
+				{links.map((link) => (
+					<a
+						href={link.href}
+						aria-current={isActive(link.href) ? 'page' : undefined}
+						class:list={[
+							'rounded-full px-3 py-2 font-medium transition duration-300 focus-visible:ring-3 focus-visible:ring-sand-400 focus-visible:outline-hidden',
+							isActive(link.href)
+								? 'bg-pond-100 text-pond-900'
+								: 'text-stone-600 hover:bg-white/80 hover:text-pond-800',
+						]}
+					>
+						{link.label}
+					</a>
+				))}
+				<ButtonLink href="/kontakt/" class="mt-2 lg:mt-0 lg:ms-3">Projekt anfragen</ButtonLink>
+			</div>
+		</div>
+	</nav>
+</header>

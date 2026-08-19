@@ -1,0 +1,55 @@
+---
+import PageIntro from '../components/PageIntro.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const requiredDetails = [
+	'Identität und Kontaktdaten der verantwortlichen Stelle',
+	'Hosting-Anbieter und technische Protokolldaten',
+	'Zwecke, Rechtsgrundlagen und Speicherdauer der Formularverarbeitung',
+	'Empfänger oder Auftragsverarbeiter für den späteren Mailversand',
+	'Betroffenenrechte und zuständige Aufsichtsbehörde',
+	'Abschließende fachliche beziehungsweise rechtliche Prüfung',
+];
+---
+
+<BaseLayout
+	title="Datenschutz"
+	description="Datenschutzhinweise von Schwimmteich für Dich – Angaben befinden sich noch in fachlicher Prüfung."
+	noindex
+>
+	<PageIntro
+		eyebrow="Rechtliches"
+		title="Datenschutz"
+		text="Die Datenschutzerklärung wird vervollständigt, sobald Hosting, Mailversand und die verantwortliche Stelle verbindlich feststehen."
+	/>
+
+	<section class="mx-auto max-w-4xl px-4 pb-20 sm:px-6 md:pb-28 lg:px-8">
+		<div class="rounded-2xl border border-sand-400 bg-sand-50 p-6 sm:p-8" role="status">
+			<p class="text-sm font-bold tracking-wider text-sand-800 uppercase">Entwurf – nicht veröffentlichungsreif</p>
+			<p class="mt-3 leading-7 text-sand-900">
+				Das Kontaktformular überträgt aktuell keine Daten. Vor Aktivierung eines Versandwegs wird
+				diese Erklärung um die konkrete Verarbeitung ergänzt und fachlich geprüft.
+			</p>
+		</div>
+
+		<div class="mt-8 rounded-2xl border border-stone-200 bg-white p-6 sm:p-8">
+			<h2 class="font-display text-3xl text-pond-950">Noch benötigte Angaben</h2>
+			<ul class="mt-6 grid gap-4">
+				{requiredDetails.map((detail) => (
+					<li class="flex items-start gap-3 text-stone-700">
+						<span class="mt-1.5 size-2 shrink-0 rounded-full bg-pond-600"></span>
+						{detail}
+					</li>
+				))}
+			</ul>
+		</div>
+
+		<div class="mt-8 rounded-2xl border border-pond-200 bg-pond-50 p-6 text-pond-900 sm:p-8">
+			<h2 class="font-display text-2xl">Cookie- und Drittanbieterdienste</h2>
+			<p class="mt-3 leading-7">
+				Aktuell sind weder Analytics noch Karten, Videos, Captcha oder andere Drittanbieter-Embeds
+				vorgesehen. Deshalb wird in dieser Projektphase kein Consent-Banner eingebaut.
+			</p>
+		</div>
+	</section>
+</BaseLayout>

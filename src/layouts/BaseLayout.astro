@@ -1,0 +1,61 @@
+---
+import SiteFooter from '../components/SiteFooter.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import '../styles/global.css';
+
+interface Props {
+	title: string;
+	description: string;
+	noindex?: boolean;
+}
+
+const { title, description, noindex = false } = Astro.props;
+const pageTitle = title === 'Startseite'
+	? 'Schwimmteich für Dich | Natürlich baden'
+	: `${title} | Schwimmteich für Dich`;
+---
+
+<!doctype html>
+<html lang="de" class="scroll-pt-24">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="theme-color" content="#1e3a3d" />
+		<meta name="description" content={description} />
+		{noindex && <meta name="robots" content="noindex, nofollow" />}
+		<meta property="og:type" content="website" />
+		<meta property="og:locale" content="de_DE" />
+		<meta property="og:title" content={pageTitle} />
+		<meta property="og:description" content={description} />
+		<title>{pageTitle}</title>
+	</head>
+	<body class="flex min-h-screen flex-col bg-stone-100 text-stone-800">
+		<a
+			href="#main-content"
+			class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-sand-300 focus:px-4 focus:py-2 focus:font-semibold focus:text-pond-950"
+		>
+			Zum Inhalt springen
+		</a>
+		<SiteHeader />
+		<main id="main-content" class="grow pt-4">
+			<slot />
+		</main>
+		<SiteFooter />
+
+		<script>
+			import 'preline';
+
+			const initPreline = () => {
+				const preline = window as Window & { HSStaticMethods?: { autoInit?: () => void } };
+				preline.HSStaticMethods?.autoInit?.();
+			};
+
+			if (document.readyState === 'loading') {
+				document.addEventListener('DOMContentLoaded', initPreline);
+			} else {
+				initPreline();
+			}
+		</script>
+	</body>
+</html>

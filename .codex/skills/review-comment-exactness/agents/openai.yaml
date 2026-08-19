@@ -1,0 +1,4 @@
+interface:
+  display_name: "Review Comment Exactness"
+  short_description: "Implement review feedback precisely"
+  default_prompt: "Use $review-comment-exactness to implement this review request faithfully, remove superseded variants, and keep code, comments, tests, and behavior aligned."

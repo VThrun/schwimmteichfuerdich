@@ -1,0 +1,43 @@
+---
+import { socialProfiles } from '../data/site';
+---
+
+<div class="mt-6 flex flex-wrap gap-3" aria-label="Social Media">
+	{socialProfiles.map((profile) => {
+		const content = (
+			<>
+				<svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+					{profile.platform === 'Facebook' ? (
+						<path fill="currentColor" stroke="none" d="M13.6 21v-8h2.7l.4-3h-3.1V8.1c0-.9.3-1.6 1.6-1.6H17V3.8c-.3 0-1.4-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2H7.5v3h2.8v8h3.3Z" />
+					) : (
+						<>
+							<rect x="3.5" y="3.5" width="17" height="17" rx="5" />
+							<circle cx="12" cy="12" r="4" />
+							<circle cx="17.4" cy="6.8" r="1" fill="currentColor" stroke="none" />
+						</>
+					)}
+				</svg>
+				<span>{profile.platform}</span>
+			</>
+		);
+
+		return profile.href ? (
+			<a
+				href={profile.href}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="inline-flex items-center gap-2 rounded-full border border-white/20 px-4 py-2 text-sm text-white transition hover:border-sand-300 hover:text-sand-300"
+			>
+				{content}
+			</a>
+		) : (
+			<span
+				class="inline-flex cursor-not-allowed items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-sm text-pond-300"
+				aria-disabled="true"
+				title={`${profile.platform}-Link folgt`}
+			>
+				{content}<span class="text-xs">· Link folgt</span>
+			</span>
+		);
+	})}
+</div>

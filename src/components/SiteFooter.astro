@@ -1,0 +1,49 @@
+---
+import BrandLogo from './BrandLogo.astro';
+import SocialLinks from './SocialLinks.astro';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="mt-auto w-full bg-pond-950 text-pond-100">
+	<div class="mx-auto w-full max-w-[85rem] px-4 py-12 sm:px-6 lg:px-8 lg:py-20">
+		<div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+			<div class="sm:col-span-2">
+				<a href="/" class="inline-flex rounded-lg focus-visible:ring-3 focus-visible:ring-sand-400 focus-visible:outline-hidden">
+					<BrandLogo class="h-auto w-48" inverse />
+				</a>
+				<p class="mt-5 max-w-sm font-display text-2xl leading-snug text-white">
+					Natürlich baden. Sorgfältig geplant.
+				</p>
+				<SocialLinks />
+			</div>
+
+			<div>
+				<h2 class="font-semibold text-white">Entdecken</h2>
+				<ul class="mt-4 grid gap-3 text-sm">
+					<li><a class="transition hover:text-sand-300" href="/angebote/">Angebote</a></li>
+					<li><a class="transition hover:text-sand-300" href="/do-it-yourself/">Do It Yourself</a></li>
+					<li><a class="transition hover:text-sand-300" href="/galerie/">Galerie</a></li>
+					<li><a class="transition hover:text-sand-300" href="/ueber-uns/">Über uns</a></li>
+					<li><a class="transition hover:text-sand-300" href="/kontakt/">Kontakt</a></li>
+				</ul>
+			</div>
+
+			<div>
+				<h2 class="font-semibold text-white">Kontakt</h2>
+				<div class="mt-4 grid gap-3 text-sm text-pond-200">
+					<p>Kontaktdaten folgen</p>
+					<p>Region Leipzig<br /><span class="text-pond-300">Angabe in Prüfung</span></p>
+				</div>
+			</div>
+		</div>
+
+		<div class="mt-12 flex flex-col gap-4 border-t border-white/15 pt-6 text-sm text-pond-300 sm:flex-row sm:items-center sm:justify-between">
+			<p>© {year} Schwimmteich für Dich</p>
+			<div class="flex gap-5">
+				<a class="transition hover:text-white" href="/impressum/">Impressum</a>
+				<a class="transition hover:text-white" href="/datenschutz/">Datenschutz</a>
+			</div>
+		</div>
+	</div>
+</footer>

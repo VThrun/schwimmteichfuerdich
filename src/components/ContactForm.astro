@@ -1,0 +1,115 @@
+<form class="rounded-2xl border border-stone-200 bg-white p-5 shadow-sm sm:p-8" data-contact-form>
+	<div class="grid gap-5 sm:grid-cols-2">
+		<label class="grid gap-2 text-sm font-semibold text-stone-800" for="name">
+			Name <span class="sr-only">(Pflichtfeld)</span>
+			<input
+				class="block w-full rounded-lg border-stone-300 px-4 py-3 text-sm focus:border-pond-600 focus:ring-pond-600"
+				id="name"
+				name="name"
+				type="text"
+				autocomplete="name"
+				required
+			/>
+		</label>
+
+		<label class="grid gap-2 text-sm font-semibold text-stone-800" for="email">
+			E-Mail <span class="sr-only">(Pflichtfeld)</span>
+			<input
+				class="block w-full rounded-lg border-stone-300 px-4 py-3 text-sm focus:border-pond-600 focus:ring-pond-600"
+				id="email"
+				name="email"
+				type="email"
+				autocomplete="email"
+				required
+			/>
+		</label>
+
+		<label class="grid gap-2 text-sm font-semibold text-stone-800" for="phone">
+			<span>Telefon <span class="font-normal text-stone-500">(optional)</span></span>
+			<input
+				class="block w-full rounded-lg border-stone-300 px-4 py-3 text-sm focus:border-pond-600 focus:ring-pond-600"
+				id="phone"
+				name="phone"
+				type="tel"
+				autocomplete="tel"
+			/>
+		</label>
+
+		<label class="grid gap-2 text-sm font-semibold text-stone-800" for="subject">
+			Betreff <span class="sr-only">(Pflichtfeld)</span>
+			<select
+				class="block w-full rounded-lg border-stone-300 px-4 py-3 text-sm focus:border-pond-600 focus:ring-pond-600"
+				id="subject"
+				name="subject"
+				required
+			>
+				<option value="">Bitte auswählen</option>
+				<option>Schwimmteich</option>
+				<option>Naturpool</option>
+				<option>Individuelle Planung</option>
+				<option>Sonstige Frage</option>
+			</select>
+		</label>
+	</div>
+
+	<label class="mt-5 grid gap-2 text-sm font-semibold text-stone-800" for="message">
+		Nachricht <span class="sr-only">(Pflichtfeld)</span>
+		<textarea
+			class="block w-full resize-y rounded-lg border-stone-300 px-4 py-3 text-sm focus:border-pond-600 focus:ring-pond-600"
+			id="message"
+			name="message"
+			rows="7"
+			required
+		></textarea>
+	</label>
+
+	<div class="absolute -left-[10000px] h-px w-px overflow-hidden" aria-hidden="true">
+		<label for="website">Website</label>
+		<input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
+	</div>
+
+	<label class="mt-6 flex items-start gap-3 text-sm leading-6 text-stone-600" for="privacy">
+		<input
+			class="mt-1 size-4 shrink-0 rounded border-stone-300 text-pond-700 focus:ring-pond-600"
+			id="privacy"
+			name="privacy"
+			type="checkbox"
+			required
+		/>
+		<span>
+			Ich habe den <a class="font-medium text-pond-700 underline underline-offset-2" href="/datenschutz/">Datenschutzhinweis</a>
+			gelesen und stimme der Verarbeitung meiner Angaben zur Bearbeitung der Anfrage zu.
+		</span>
+	</label>
+
+	<div class="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+		<button
+			class="inline-flex items-center justify-center rounded-full border border-pond-700 bg-pond-700 px-5 py-3 text-sm font-semibold text-white transition duration-300 hover:bg-pond-800 focus-visible:ring-3 focus-visible:ring-sand-400 focus-visible:outline-hidden"
+			type="submit"
+		>
+			Anfrage vorbereiten
+		</button>
+		<p class="text-xs text-stone-500">Alle Felder außer Telefon sind Pflichtfelder.</p>
+	</div>
+
+	<p
+		class="mt-5 hidden rounded-lg border border-sand-300 bg-sand-50 p-4 text-sm text-sand-900"
+		data-form-status
+		tabindex="-1"
+		aria-live="polite"
+	></p>
+</form>
+
+<script>
+	const form = document.querySelector<HTMLFormElement>('[data-contact-form]');
+	const status = form?.querySelector<HTMLElement>('[data-form-status]');
+
+	form?.addEventListener('submit', (event) => {
+		event.preventDefault();
+		if (!status) return;
+
+		status.textContent = 'Noch nicht versendet: Der Mailversand wird nach Auswahl des Hostings eingerichtet.';
+		status.classList.remove('hidden');
+		status.focus();
+	});
+</script>

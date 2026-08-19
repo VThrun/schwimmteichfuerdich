@@ -1,0 +1,4 @@
+interface:
+  display_name: "Continuous Skill Learning"
+  short_description: "Capture verified lessons in reusable skills"
+  default_prompt: "Use $continuous-skill-learning to turn this demonstrated recurring workflow lesson into a focused skill improvement."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Confirm Before Acting"
+  short_description: "Confirm unapproved material side effects"
+  default_prompt: "Use $confirm-before-acting to request approval immediately before a material side effect that the user has not already authorized."

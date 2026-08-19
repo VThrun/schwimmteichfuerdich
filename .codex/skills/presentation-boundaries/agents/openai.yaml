@@ -1,0 +1,4 @@
+interface:
+  display_name: "Presentation Boundaries"
+  short_description: "Keep display logic in presentation layers"
+  default_prompt: "Use $presentation-boundaries to place rendering and display concerns in presentation layers while keeping domain and data-access responsibilities focused."

@@ -1,17 +1,189 @@
 ---
+import MediaPlaceholder from '../components/MediaPlaceholder.astro';
+import GalleryGrid from '../components/GalleryGrid.astro';
+import ButtonLink from '../components/ui/ButtonLink.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
 
+const ways = [
+	{
+		number: '01',
+		label: 'Natürlich & weich',
+		title: 'Schwimmteich',
+		text: 'Pflanzzone und Badebereich bilden ein harmonisches Ganzes.',
+		featured: true,
+	},
+	{
+		number: '02',
+		label: 'Klar & geradlinig',
+		title: 'Naturpool',
+		text: 'Reduzierte Architektur trifft auf natürliche Wasseraufbereitung.',
+		featured: false,
+	},
+	{
+		number: '03',
+		label: 'Frei & individuell',
+		title: 'Nach Wunsch',
+		text: 'Eine Lösung entlang Ihrer Ideen und der Bedingungen vor Ort.',
+		featured: false,
+	},
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout
+	title="Startseite"
+	description="Individuell geplante Schwimmteiche und Naturpools für ein natürliches Badeerlebnis im eigenen Garten."
+>
+	<section class="mx-auto grid max-w-[85rem] gap-10 px-4 py-16 sm:px-6 md:grid-cols-2 md:items-center md:py-24 lg:px-8">
+		<div>
+			<p class="text-sm font-bold tracking-[0.18em] text-pond-700 uppercase">Schwimmteiche & Naturpools</p>
+			<h1 class="mt-4 font-display text-5xl leading-[1.02] tracking-tight text-pond-950 sm:text-6xl lg:text-7xl">
+				Natürlich baden. <span class="text-pond-700">Im eigenen Garten.</span>
+			</h1>
+			<p class="mt-6 max-w-xl text-lg leading-8 text-stone-600">
+				Wir verbinden klares Design, lebendige Pflanzbereiche und eine Planung, die zu Ihrem
+				Grundstück passt.
+			</p>
+			<div class="mt-8 grid gap-3 sm:inline-flex">
+				<ButtonLink href="/angebote/">Angebote entdecken</ButtonLink>
+				<ButtonLink href="/kontakt/" variant="secondary">Projekt besprechen</ButtonLink>
+			</div>
+		</div>
+
+		<div class="relative">
+			<MediaPlaceholder label="Projektbild wird ergänzt" shape="landscape" />
+			<div class="absolute -bottom-5 left-5 right-5 rounded-2xl border border-white/70 bg-white/85 p-4 shadow-lg backdrop-blur sm:left-auto sm:max-w-xs">
+				<p class="text-xs font-bold tracking-wider text-pond-700 uppercase">Natürlich geplant</p>
+				<p class="mt-1 font-display text-xl text-pond-950">Ein lebendiger Ruhepol für den Garten.</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="mx-auto max-w-[85rem] px-4 pb-16 sm:px-6 md:pb-24 lg:px-8">
+		<div class="grid overflow-hidden rounded-2xl border border-stone-200 bg-white sm:grid-cols-3">
+			<div class="p-6 sm:border-r sm:border-stone-200">
+				<span class="text-xs font-bold text-pond-700">01</span>
+				<p class="mt-2 font-display text-xl text-pond-950">Ganzheitlich geplant</p>
+			</div>
+			<div class="border-t border-stone-200 p-6 sm:border-r sm:border-t-0">
+				<span class="text-xs font-bold text-pond-700">02</span>
+				<p class="mt-2 font-display text-xl text-pond-950">Sorgfältig gebaut</p>
+			</div>
+			<div class="border-t border-stone-200 p-6 sm:border-t-0">
+				<span class="text-xs font-bold text-pond-700">03</span>
+				<p class="mt-2 font-display text-xl text-pond-950">Natürlich gestaltet</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="bg-white">
+		<div class="mx-auto grid max-w-[85rem] gap-12 px-4 py-20 sm:px-6 md:grid-cols-2 md:items-end md:py-28 lg:px-8">
+			<div>
+				<p class="text-sm font-bold tracking-[0.18em] text-pond-700 uppercase">Wasser neu erleben</p>
+				<h2 class="mt-4 max-w-xl font-display text-4xl leading-tight text-pond-950 sm:text-5xl">
+					Ein Teich, der mit dem Garten lebt.
+				</h2>
+			</div>
+			<div class="grid gap-5 text-lg leading-8 text-stone-600">
+				<p>
+					Schwimmteiche und Naturpools verbinden Badebereich und bepflanzte Filterzone. Ein
+					Kiesfilter übernimmt dabei die Wasseraufbereitung ohne chemische Zusätze.
+				</p>
+				<p>
+					Ob klar gegliedert oder besonders naturnah: Konstruktion, Ufer und Bepflanzung werden
+					als zusammenhängender Lebensraum gedacht.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="mx-auto max-w-[85rem] px-4 py-20 sm:px-6 md:py-28 lg:px-8">
+		<div class="grid gap-8 lg:grid-cols-[1.3fr_0.7fr] lg:items-end">
+			<div>
+				<p class="text-sm font-bold tracking-[0.18em] text-pond-700 uppercase">Drei Wege zum Wasser</p>
+				<h2 class="mt-4 max-w-3xl font-display text-4xl leading-tight text-pond-950 sm:text-5xl">
+					Passend zu Garten und Lebensgefühl.
+				</h2>
+			</div>
+			<p class="leading-7 text-stone-600">
+				Die Varianten geben eine gestalterische Richtung vor. Maße, Ausstattung und Ausführung
+				werden im Projekt abgestimmt.
+			</p>
+		</div>
+
+		<div class="mt-12 grid gap-5 lg:grid-cols-3">
+			{ways.map((way) => (
+				<article
+					class:list={[
+						'flex min-h-80 flex-col justify-between rounded-2xl border p-7',
+						way.featured
+							? 'border-pond-800 bg-pond-800 text-white'
+							: 'border-stone-200 bg-white text-pond-950',
+					]}
+				>
+					<span class:list={['text-xs font-bold', way.featured ? 'text-sand-300' : 'text-pond-700']}>
+						{way.number}
+					</span>
+					<div>
+						<p class:list={['text-xs font-bold tracking-wider uppercase', way.featured ? 'text-sand-300' : 'text-pond-700']}>
+							{way.label}
+						</p>
+						<h3 class="mt-2 font-display text-4xl">{way.title}</h3>
+						<p class:list={['mt-4 leading-7', way.featured ? 'text-pond-100' : 'text-stone-600']}>
+							{way.text}
+						</p>
+					</div>
+				</article>
+			))}
+		</div>
+
+		<a class="mt-8 inline-flex items-center gap-2 font-semibold text-pond-700 hover:text-pond-900" href="/angebote/">
+			Alle vorbereiteten Angebote <span aria-hidden="true">→</span>
+		</a>
+	</section>
+
+	<section class="bg-pond-50">
+		<div class="mx-auto grid max-w-[85rem] gap-12 px-4 py-20 sm:px-6 md:grid-cols-2 md:items-center md:py-28 lg:px-8">
+			<MediaPlaceholder label="Detailaufnahme wird ergänzt" variant="sand" />
+			<div>
+				<p class="text-sm font-bold tracking-[0.18em] text-pond-700 uppercase">Planung mit Weitblick</p>
+				<h2 class="mt-4 font-display text-4xl leading-tight text-pond-950 sm:text-5xl">
+					Von der ersten Linie bis zur letzten Pflanze.
+				</h2>
+				<p class="mt-6 leading-7 text-stone-600">
+					Ein stimmiges Teichprojekt beginnt mit dem Gelände und endet nicht am Beckenrand. Wir
+					betrachten Konstruktion, Technik und Gestaltung gemeinsam.
+				</p>
+				<ol class="mt-8 divide-y divide-stone-300 border-y border-stone-300">
+					<li class="grid grid-cols-[2rem_1fr] gap-3 py-4"><span class="text-xs font-bold text-pond-700">01</span><strong>Kennenlernen & Grundstück verstehen</strong></li>
+					<li class="grid grid-cols-[2rem_1fr] gap-3 py-4"><span class="text-xs font-bold text-pond-700">02</span><strong>Entwurf & Ausführung abstimmen</strong></li>
+					<li class="grid grid-cols-[2rem_1fr] gap-3 py-4"><span class="text-xs font-bold text-pond-700">03</span><strong>Bau & Bepflanzung umsetzen</strong></li>
+				</ol>
+			</div>
+		</div>
+	</section>
+
+	<section class="bg-white">
+		<div class="mx-auto max-w-[85rem] px-4 py-20 sm:px-6 md:py-28 lg:px-8">
+			<div class="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+				<div>
+					<p class="text-sm font-bold tracking-[0.18em] text-pond-700 uppercase">Galerie</p>
+					<h2 class="mt-4 max-w-3xl font-display text-4xl leading-tight text-pond-950 sm:text-5xl">Platz für echte Projekte und besondere Details.</h2>
+				</div>
+				<a class="font-semibold text-pond-700 hover:text-pond-900" href="/galerie/">Alle Eindrücke ansehen →</a>
+			</div>
+			<div class="mt-12">
+				<GalleryGrid id="home-gallery" count={6} compact />
+			</div>
+		</div>
+	</section>
+
+	<section class="bg-pond-800 text-white">
+		<div class="mx-auto flex max-w-[85rem] flex-col gap-8 px-4 py-16 sm:px-6 md:flex-row md:items-end md:justify-between md:py-20 lg:px-8">
+			<div>
+				<p class="text-sm font-bold tracking-[0.18em] text-sand-300 uppercase">Ihr Garten. Ihr Wasser.</p>
+				<h2 class="mt-3 max-w-3xl font-display text-4xl leading-tight sm:text-5xl">Lassen Sie uns über Ihre Idee sprechen.</h2>
+			</div>
+			<ButtonLink href="/kontakt/" variant="light" class="shrink-0">Projekt anfragen</ButtonLink>
+		</div>
+	</section>
+</BaseLayout>
