@@ -9,5 +9,12 @@ Last verified: August 20, 2026
   migration target.
 - The site is a static Astro build with no server application, database, or
   external API.
+- The runtime requirement is Node.js 22.12.0 or newer. The site generator is
+  Astro 7 with TypeScript in strict mode.
+- Styling uses Tailwind CSS 4 through its Vite plugin. Project-specific tokens
+  and global rules live in `src/styles/global.css`.
+- Preline supports responsive navigation; other interaction stays in small
+  local browser scripts inside Astro components.
+- Astro is configured with `prefetch: true`.
 - Verification consists of `npm run build` and manual desktop/mobile review;
   automated tests are outside the current project agreement.
