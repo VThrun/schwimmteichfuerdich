@@ -10,39 +10,50 @@
 	--font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 	--font-display: Georgia, 'Times New Roman', serif;
 
-	--color-pond-50: #eef7f6;
-	--color-pond-100: #d9ece9;
-	--color-pond-200: #b6d9d5;
-	--color-pond-300: #87bdb9;
-	--color-pond-400: #579c9a;
-	--color-pond-500: #397f80;
-	--color-pond-600: #2a6669;
-	--color-pond-700: #255356;
-	--color-pond-800: #214448;
-	--color-pond-900: #1e3a3d;
-	--color-pond-950: #0d2225;
+	--color-pond-50: #edf3eb;
+	--color-pond-100: #dce9dc;
+	--color-pond-200: #bfd4c1;
+	--color-pond-300: #98b99e;
+	--color-pond-400: #6d9a78;
+	--color-pond-500: #4b825d;
+	--color-pond-600: #34734f;
+	--color-pond-700: #286946;
+	--color-pond-800: #1e4c35;
+	--color-pond-900: #1e372a;
+	--color-pond-950: #192b21;
 
-	--color-reed-50: #f3f6f0;
-	--color-reed-100: #e2e9dc;
-	--color-reed-200: #c6d4ba;
-	--color-reed-300: #a4ba92;
-	--color-reed-400: #839f70;
-	--color-reed-500: #668354;
-	--color-reed-600: #4e6840;
-	--color-reed-700: #3e5235;
-	--color-reed-800: #34432e;
-	--color-reed-900: #2d3929;
+	--color-reed-50: #f2f4e9;
+	--color-reed-100: #e3e8d3;
+	--color-reed-200: #ccd6b2;
+	--color-reed-300: #afc08e;
+	--color-reed-400: #8fa66d;
+	--color-reed-500: #718851;
+	--color-reed-600: #596d40;
+	--color-reed-700: #475735;
+	--color-reed-800: #3b472e;
+	--color-reed-900: #323c29;
 
-	--color-sand-50: #fbf8f1;
-	--color-sand-100: #f5edda;
-	--color-sand-200: #ead9b6;
-	--color-sand-300: #ddc18a;
-	--color-sand-400: #d1a961;
-	--color-sand-500: #c49543;
-	--color-sand-600: #ad7937;
-	--color-sand-700: #8c5b30;
-	--color-sand-800: #744a2d;
-	--color-sand-900: #623e29;
+	--color-sand-50: #fcf9ef;
+	--color-sand-100: #f1ebd9;
+	--color-sand-200: #e6dfc8;
+	--color-sand-300: #e0d8be;
+	--color-sand-400: #cbbf9d;
+	--color-sand-500: #b2a476;
+	--color-sand-600: #968653;
+	--color-sand-700: #786a40;
+	--color-sand-800: #605435;
+	--color-sand-900: #4d442f;
+
+	--color-stone-50: #faf7ed;
+	--color-stone-100: #f1ebd9;
+	--color-stone-200: #e0d8be;
+	--color-stone-300: #c7c0aa;
+	--color-stone-500: #758077;
+	--color-stone-600: #5d695f;
+	--color-stone-700: #3f4e43;
+	--color-stone-800: #28382d;
+
+	--color-white: #fcf9ef;
 }
 
 @layer base {
