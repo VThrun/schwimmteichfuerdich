@@ -1,6 +1,6 @@
 # Conventions
 
-Last verified: August 19, 2026
+Last verified: August 20, 2026
 
 - Prefer native Astro components, file-based routing, and TypeScript. Do not add
   a client framework while small local browser scripts are sufficient.

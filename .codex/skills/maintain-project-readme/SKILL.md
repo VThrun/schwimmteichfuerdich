@@ -1,23 +1,29 @@
 ---
 name: maintain-project-readme
-description: Keep a repository's durable agent and developer context accurate across sessions. Use when onboarding to a repository or after verified changes to architecture, structure, integrations, setup, commands, testing, deployment, conventions, or recurring limitations require updates to AGENTS.md or the repository's designated context document.
+description: Update a repository README or onboarding documentation when the user requests documentation maintenance or verified project changes make the existing guidance stale. Keep canonical facts linked instead of duplicated.
 ---
 
-# Maintain Project Context
+# Maintain Project README
 
-Maintain the repository's canonical onboarding and agent-context document. Prefer a root `AGENTS.md` when present; otherwise use the context document already established by the project.
+Maintain the repository's developer-facing README and onboarding documentation.
+The root `AGENTS.md` and `.codex/context/` remain the canonical agent-rule and
+project-fact sources; do not copy their complete contents into a README.
 
 ## Workflow
 
-1. Read the existing context document, root README, relevant manifests, and configuration.
-2. Inspect the changed areas and nearby tests or scripts. Treat code and configuration as authoritative.
-3. Update only verified, reusable knowledge: purpose, boundaries, architecture, important flows, setup, validation commands, conventions, integrations, and known limitations.
-4. Remove stale statements and link to deeper canonical documentation instead of duplicating it.
-5. Review the diff and run lightweight documentation validation.
+1. Read `AGENTS.md`, `.codex/context/README.md` when present, the root README,
+   relevant manifests, and configuration.
+2. Inspect the changed areas and nearby tests or scripts. Treat code and
+   configuration as authoritative.
+3. Update only verified onboarding facts: purpose, setup, commands, key
+   architecture boundaries, integrations, and known limitations.
+4. Link to canonical context and deeper documentation instead of duplicating
+   project rules or transient task history.
+5. Review the diff and validate internal documentation links.
 
 ## Include
 
-- reliable start, test, lint, build, migration, and troubleshooting commands
+- reliable start, test, lint, build, and troubleshooting commands
 - important directories, module boundaries, data flows, and ownership
 - environment assumptions and recurring safety notes
 - conventions that future agents could easily violate
@@ -29,5 +35,6 @@ Maintain the repository's canonical onboarding and agent-context document. Prefe
 - speculative architecture or unverified commands
 - dependency inventories that are already captured by manifests
 - completed ticket history, transient failures, and task-by-task changelogs
+- a second copy of `AGENTS.md` or `.codex/context/` rules
 
 Do not update project context for routine edits that introduce no durable knowledge.

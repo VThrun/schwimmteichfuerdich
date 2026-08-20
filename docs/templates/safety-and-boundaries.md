@@ -1,6 +1,6 @@
 # Safety and boundaries
 
-Last verified: August 19, 2026
+Last verified: August 20, 2026
 
 ## Content and publication
 

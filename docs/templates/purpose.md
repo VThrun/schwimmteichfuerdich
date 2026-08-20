@@ -1,6 +1,6 @@
 # Purpose
 
-Last verified: August 19, 2026
+Last verified: August 20, 2026
 
 This repository contains the first static design draft for the German
 “Schwimmteich für Dich” website. It demonstrates the information architecture

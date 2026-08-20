@@ -1,6 +1,6 @@
 # Architecture
 
-Last verified: August 19, 2026
+Last verified: August 20, 2026
 
 The website is a statically built Astro project. File-based routing in
 `src/pages/` creates the public pages. There is no server-side application,

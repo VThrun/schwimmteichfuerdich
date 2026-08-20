@@ -1,6 +1,6 @@
 # Technical stack
 
-Last verified: August 19, 2026
+Last verified: August 20, 2026
 
 - **Runtime:** Node.js 22.12.0 or newer
 - **Site generator:** Astro 7 with TypeScript in strict mode

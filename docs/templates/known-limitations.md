@@ -1,6 +1,6 @@
 # Known limitations
 
-Last verified: August 19, 2026
+Last verified: August 20, 2026
 
 - The current version is Design Draft 1 and contains placeholders for prices,
   product details, images, contact information, and legal text.

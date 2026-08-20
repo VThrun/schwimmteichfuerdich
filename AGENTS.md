@@ -2,10 +2,12 @@
 
 ## Project Overview
 
-This repository contains a static Astro website. Prefer native Astro components,
-file-based routing, TypeScript, and the existing CSS/UI setup. Do not introduce a
-client framework unless a confirmed requirement cannot be implemented clearly with
-Astro and small, local browser scripts.
+This repository contains the first static Astro design draft. Prefer native Astro
+components, file-based routing, TypeScript, and the existing CSS/UI setup. The
+visual system is based on an Astro theme selected for this project; it was not
+created with daisyUI Blueprint and is not a Blueprint/MCP migration target. Do
+not introduce a client framework unless a confirmed requirement cannot be
+implemented clearly with Astro and small, local browser scripts.
 
 The project can be in a design-only phase. During that phase, keep prices, images,
 technical specifications, contact data, and legal content as clearly recognizable
@@ -19,15 +21,24 @@ Install dependencies with `npm install` and verify production output with:
 npm run build
 ```
 
-When starting the dev server, use background mode:
+When starting the local dev server, use the repository-local Astro CLI in
+background mode:
 
 ```
-astro dev --background
+npm run astro -- dev --background
 ```
 
-Manage the background server with `astro dev stop`, `astro dev status`, and `astro dev logs`.
+Manage it with `npm run astro -- dev stop`, `npm run astro -- dev status`, and
+`npm run astro -- dev logs`.
 
 Do not add automated tests unless the user changes the current project agreement.
+
+## Tool and AI boundaries
+
+This project does not use daisyUI Blueprint or a Blueprint MCP workflow. Do not
+start, introduce, or migrate to Blueprint based on historical context, tool
+availability, or similarities with Design Draft 2. Only change this boundary
+after an explicit user request.
 
 ## Project Context
 
