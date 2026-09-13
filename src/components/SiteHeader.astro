@@ -4,11 +4,11 @@ import ButtonLink from './ui/ButtonLink.astro';
 
 const links = [
 	{ href: '/', label: 'Start' },
-	{ href: '/angebote/', label: 'Angebote' },
+	{ href: '/angebote/', label: 'Schwimmteiche' },
 	{ href: '/do-it-yourself/', label: 'DIY' },
 	{ href: '/galerie/', label: 'Galerie' },
+	{ href: '/gartengestaltung/', label: 'Gartengestaltung' },
 	{ href: '/ueber-uns/', label: 'Über uns' },
-	{ href: '/kontakt/', label: 'Kontakt' },
 ];
 
 const currentPath = Astro.url.pathname;
@@ -16,9 +16,9 @@ const isActive = (href: string) =>
 	href === '/' ? currentPath === href : currentPath.startsWith(href);
 ---
 
-<header class="sticky inset-x-0 top-4 z-50 flex w-full flex-wrap text-sm lg:flex-nowrap lg:justify-start">
+<header class="sticky inset-x-0 top-3 z-50 flex w-full flex-wrap text-sm lg:flex-nowrap lg:justify-start">
 	<nav
-		class="relative mx-2 w-full rounded-[2.25rem] border border-white/60 bg-sand-50/90 px-4 py-3 shadow-sm backdrop-blur-md lg:flex lg:items-center lg:justify-between lg:px-6 lg:py-2 xl:mx-auto xl:max-w-[85rem] xl:px-8"
+		class="relative mx-2 w-full rounded-[2.25rem] border border-white/70 bg-sand-50/88 px-4 py-3 shadow-[0_12px_35px_rgba(16,38,28,0.08)] backdrop-blur-xl lg:flex lg:items-center lg:justify-between lg:px-5 lg:py-2 xl:mx-auto xl:max-w-[88rem] xl:px-7"
 		aria-label="Hauptnavigation"
 	>
 		<div class="flex items-center justify-between">
@@ -27,7 +27,7 @@ const isActive = (href: string) =>
 				href="/"
 				aria-label="Schwimmteich für Dich – Startseite"
 			>
-				<BrandLogo class="h-auto w-38 sm:w-44" />
+				<BrandLogo class="h-auto w-36 sm:w-42" />
 			</a>
 
 			<div class="ml-auto lg:hidden">
@@ -49,13 +49,13 @@ const isActive = (href: string) =>
 		</div>
 
 		<div id="site-navigation" class="hs-collapse hidden grow basis-full overflow-hidden transition-all duration-300 lg:block">
-			<div class="mt-5 flex flex-col gap-y-1 lg:mt-0 lg:flex-row lg:items-center lg:justify-end lg:gap-x-1 lg:ps-7">
+			<div class="mt-5 flex flex-col gap-y-1 lg:mt-0 lg:flex-row lg:items-center lg:justify-end lg:gap-x-0.5 lg:ps-5 xl:gap-x-1">
 				{links.map((link) => (
 					<a
 						href={link.href}
 						aria-current={isActive(link.href) ? 'page' : undefined}
 						class:list={[
-							'rounded-full px-3 py-2 font-medium transition duration-300 focus-visible:ring-3 focus-visible:ring-sand-400 focus-visible:outline-hidden',
+							'rounded-full px-2.5 py-2 text-[0.82rem] font-semibold transition duration-300 focus-visible:ring-3 focus-visible:ring-sand-400 focus-visible:outline-hidden xl:px-3 xl:text-sm',
 							isActive(link.href)
 								? 'bg-pond-900 text-white'
 								: 'text-stone-600 hover:bg-white/80 hover:text-pond-800',

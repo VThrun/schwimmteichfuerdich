@@ -1,15 +1,13 @@
 ---
 import GalleryGrid from '../../components/GalleryGrid.astro';
-import MediaPlaceholder from '../../components/MediaPlaceholder.astro';
+import VisualImage from '../../components/VisualImage.astro';
 import ButtonLink from '../../components/ui/ButtonLink.astro';
-import { offers, type Offer } from '../../data/offers';
+import { visuals } from '../../data/media';
+import { formatPrice, offers, type Offer } from '../../data/offers';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 export function getStaticPaths() {
-	return offers.map((offer) => ({
-		params: { slug: offer.slug },
-		props: { offer },
-	}));
+	return offers.map((offer) => ({ params: { slug: offer.slug }, props: { offer } }));
 }
 
 interface Props {
@@ -17,107 +15,97 @@ interface Props {
 }
 
 const { offer } = Astro.props;
-const detailPlaceholders = [
-	'Maße und Aufteilung werden ergänzt',
-	'Materialien und Technik werden ergänzt',
-	'Ausführung und Optionen werden ergänzt',
-];
+const potentialSaving = offer.pricing.diyFrom !== null && offer.pricing.turnkeyFrom !== null
+	? offer.pricing.turnkeyFrom - offer.pricing.diyFrom
+	: null;
+const detailVisuals = [visuals[offer.visual], visuals.evening, visuals.biotope];
 ---
 
 <BaseLayout
 	title={offer.title}
-	description={`Vorbereitete Detailseite für ${offer.title}. Inhalte und technische Angaben folgen nach der Freigabe.`}
+	description={`${offer.title}: natürliches Wasser, Holzverbau und wählbare Eigenleistung für eine Wasserwelt im eigenen Garten.`}
 >
 	<section class="mx-auto max-w-[85rem] px-4 py-12 sm:px-6 md:py-20 lg:px-8">
-		<a class="inline-flex items-center gap-2 text-sm font-semibold text-pond-700 hover:text-pond-900" href="/angebote/">
-			<span aria-hidden="true">←</span> Alle Angebote
+		<a class="inline-flex items-center gap-2 text-sm font-semibold text-pond-700 transition hover:text-pond-950" href="/angebote/">
+			<span aria-hidden="true">←</span> Alle Schwimmteiche
 		</a>
 
-		<div class="mt-8 grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
-			<MediaPlaceholder label={`Produktbild für ${offer.title} folgt`} variant={offer.visual} shape="landscape" />
-			<div>
-				<p class="text-sm font-bold tracking-[0.18em] text-pond-700 uppercase">{offer.category}</p>
-				<h1 class="mt-4 font-display text-5xl leading-tight text-pond-950 sm:text-6xl">{offer.title}</h1>
-				<p class="mt-6 max-w-xl text-lg leading-8 text-stone-600">
-					Hier folgt später die fachlich geprüfte Produktbeschreibung. Dieser Bereich zeigt
-					bereits die vorgesehene Textlänge und Seitenaufteilung.
-				</p>
+		<div class="mt-8 grid gap-10 lg:grid-cols-[1.08fr_0.92fr] lg:items-center lg:gap-16">
+			<VisualImage visual={offer.visual} class="aspect-[5/4] rounded-[2rem]" eager />
+			<div data-reveal>
+				<p class="eyebrow">{offer.category}</p>
+				<h1 class="mt-4 font-display text-5xl font-semibold leading-[0.95] text-pond-950 sm:text-6xl">{offer.title}</h1>
+				<p class="mt-6 max-w-xl text-lg leading-8 text-stone-600">{offer.description} Die konkrete Ausführung richtet sich immer nach Ihrem Grundstück und der gewünschten Nutzung.</p>
+
 				<div class="mt-8 grid gap-4 sm:grid-cols-2">
-					<div class="rounded-2xl border border-stone-200 bg-white p-5">
-						<p class="text-xs font-bold tracking-wider text-pond-700 uppercase">Do It Yourself</p>
-						<p class="mt-3 font-display text-3xl text-pond-950">{offer.priceLabel}</p>
-						<p class="mt-2 text-sm text-stone-500">{offer.customPrice ? 'Individuelles Angebot · Platzhalter' : 'inkl. MwSt. · Platzhalter'}</p>
+					<div class="rounded-[1.35rem] border border-stone-200 bg-white p-5 shadow-sm">
+						<p class="text-xs font-bold tracking-[0.16em] text-pond-700 uppercase">Do It Yourself</p>
+						<p class="mt-3 font-display text-3xl font-semibold text-pond-950">{formatPrice(offer.pricing.diyFrom)}</p>
+						<p class="mt-2 text-sm leading-6 text-stone-500">Mit vorab abgestimmter Eigenleistung.</p>
 					</div>
-					<div class="rounded-2xl border border-pond-800 bg-pond-800 p-5 text-white">
-						<p class="text-xs font-bold tracking-wider text-sand-300 uppercase">Badefertig</p>
-						<p class="mt-3 font-display text-3xl">{offer.customPrice ? 'Preis auf Anfrage' : 'ab XX.XXX €'}</p>
-						<p class="mt-2 text-sm text-pond-200">{offer.customPrice ? 'Individuelles Angebot · Platzhalter' : 'inkl. MwSt. · Platzhalter'}</p>
+					<div class="rounded-[1.35rem] border border-pond-800 bg-pond-800 p-5 text-white shadow-sm">
+						<p class="text-xs font-bold tracking-[0.16em] text-sand-300 uppercase">Badefertig</p>
+						<p class="mt-3 font-display text-3xl font-semibold">{formatPrice(offer.pricing.turnkeyFrom)}</p>
+						<p class="mt-2 text-sm leading-6 text-pond-100">Mit professionell ausgeführten Bauphasen.</p>
 					</div>
 				</div>
-				<p class="mt-4 text-sm text-stone-500">Alle Preisangaben dienen ausschließlich der Darstellung des späteren Designs.</p>
+				{potentialSaving !== null && (
+					<p class="mt-4 border-l-2 border-sand-500 pl-4 text-sm font-semibold text-pond-800">Die Beispielpreise machen sichtbar: Durch passende Eigenleistung kann der finanzielle Rahmen um bis zu {new Intl.NumberFormat('de-DE').format(potentialSaving)} € sinken.</p>
+				)}
+				<p class="mt-4 text-xs leading-5 text-stone-500">Alle Preisangaben sind illustrative Designbeispiele, nicht fachlich freigegeben und kein verbindliches Angebot.</p>
 			</div>
 		</div>
 	</section>
 
-	<section class="bg-white">
-		<div class="mx-auto grid max-w-[85rem] gap-12 px-4 py-20 sm:px-6 md:grid-cols-[0.8fr_1.2fr] md:py-28 lg:px-8">
-			<div>
-				<p class="text-sm font-bold tracking-[0.18em] text-pond-700 uppercase">Produktdetails</p>
-				<h2 class="mt-4 font-display text-4xl leading-tight text-pond-950 sm:text-5xl">Die wichtigsten Angaben auf einen Blick.</h2>
-				<p class="mt-6 leading-7 text-stone-600">Die endgültigen Maße, Materialien und Ausstattungsmerkmale werden nach der Kundenfreigabe eingetragen.</p>
+	<section class="border-y border-stone-200 bg-white">
+		<div class="mx-auto grid max-w-[85rem] gap-12 px-4 py-20 sm:px-6 md:py-28 lg:grid-cols-[0.78fr_1.22fr] lg:px-8">
+			<div data-reveal>
+				<p class="eyebrow">Das natürliche System</p>
+				<h2 class="mt-4 font-display text-4xl font-semibold leading-tight text-pond-950 sm:text-5xl">Weniger Pool. Mehr Garten.</h2>
+				<p class="mt-6 text-lg leading-8 text-stone-600">Die Konstruktion verbindet den Badebereich direkt mit seiner natürlichen Umgebung. So bleibt der Teich ein Teil des Gartens – nicht ein Fremdkörper darin.</p>
 			</div>
-			<div class="grid gap-4">
-				{detailPlaceholders.map((item, index) => (
-					<div class="grid grid-cols-[3rem_1fr] items-center gap-4 rounded-2xl border border-stone-200 bg-stone-50 p-5 sm:p-6">
-						<span class="font-display text-2xl text-pond-700">{String(index + 1).padStart(2, '0')}</span>
-						<strong class="text-pond-950">{item}</strong>
-					</div>
-				))}
+			<div class="grid gap-4 sm:grid-cols-3">
+				<article class="rounded-2xl bg-pond-50 p-6"><span class="text-xs font-bold text-sand-700">01</span><h3 class="mt-7 font-display text-2xl font-semibold text-pond-950">Holzbauweise</h3><p class="mt-3 leading-7 text-stone-600">Das natürliche Material prägt Form und Atmosphäre.</p></article>
+				<article class="rounded-2xl bg-pond-50 p-6"><span class="text-xs font-bold text-sand-700">02</span><h3 class="mt-7 font-display text-2xl font-semibold text-pond-950">Ein Becken</h3><p class="mt-3 leading-7 text-stone-600">Die Filterung arbeitet ohne separates Filterbecken.</p></article>
+				<article class="rounded-2xl bg-pond-50 p-6"><span class="text-xs font-bold text-sand-700">03</span><h3 class="mt-7 font-display text-2xl font-semibold text-pond-950">Lebendiges Grün</h3><p class="mt-3 leading-7 text-stone-600">Pflanzen binden die Wasserfläche in den Garten ein.</p></article>
 			</div>
 		</div>
 	</section>
 
 	<section class="mx-auto max-w-[85rem] px-4 py-20 sm:px-6 md:py-28 lg:px-8">
-		<div class="grid gap-8 lg:grid-cols-2">
-			<article class="rounded-2xl border border-stone-200 bg-white p-7 sm:p-9">
-				<p class="text-xs font-bold tracking-wider text-pond-700 uppercase">Leistungsumfang</p>
-				<h2 class="mt-3 font-display text-3xl text-pond-950">Enthaltene Leistungen folgen.</h2>
-				<ul class="mt-6 divide-y divide-stone-200 border-y border-stone-200">
-					{Array.from({ length: 4 }, (_, index) => (
-						<li class="flex items-center gap-3 py-4 text-stone-600"><span class="text-reed-600" aria-hidden="true">✓</span> Leistungsposition {String(index + 1).padStart(2, '0')}</li>
-					))}
+		<div class="grid overflow-hidden rounded-[2rem] border border-stone-200 bg-white lg:grid-cols-2" data-reveal>
+			<article class="p-8 sm:p-10">
+				<p class="eyebrow">Das können Sie übernehmen</p>
+				<h2 class="mt-3 font-display text-4xl font-semibold text-pond-950">Ihr Anteil am Projekt.</h2>
+				<ul class="mt-7 divide-y divide-stone-200 border-y border-stone-200">
+					{offer.diyTasks.map((task) => <li class="flex gap-3 py-4 text-stone-700"><span class="text-sand-700" aria-hidden="true">✓</span>{task}</li>)}
 				</ul>
 			</article>
-			<article class="rounded-2xl border border-stone-200 bg-sand-50 p-7 sm:p-9">
-				<p class="text-xs font-bold tracking-wider text-sand-700 uppercase">Bauseitige Leistungen</p>
-				<h2 class="mt-3 font-display text-3xl text-pond-950">Abgrenzung wird ergänzt.</h2>
-				<p class="mt-6 leading-7 text-stone-600">Hier werden später klar und verständlich alle Leistungen aufgeführt, die nicht Bestandteil des jeweiligen Angebots sind.</p>
+			<article class="border-t border-stone-200 bg-pond-800 p-8 text-white sm:p-10 lg:border-l lg:border-t-0">
+				<p class="text-xs font-bold tracking-[0.18em] text-sand-300 uppercase">Das sichern wir fachlich ab</p>
+				<h2 class="mt-3 font-display text-4xl font-semibold">Unser Anteil am Projekt.</h2>
+				<ul class="mt-7 divide-y divide-white/15 border-y border-white/15">
+					{offer.professionalTasks.map((task) => <li class="flex gap-3 py-4 text-pond-100"><span class="text-sand-300" aria-hidden="true">✓</span>{task}</li>)}
+				</ul>
 			</article>
 		</div>
+		<p class="mt-4 text-sm leading-6 text-stone-500">Die verbindliche Aufgabenverteilung, technische Ausführung und Materialauswahl werden für jedes Projekt individuell abgestimmt.</p>
 	</section>
 
-	<section class="bg-pond-50">
+	<section class="border-y border-stone-200 bg-pond-50">
 		<div class="mx-auto max-w-[85rem] px-4 py-20 sm:px-6 md:py-28 lg:px-8">
-			<div class="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-				<div>
-					<p class="text-sm font-bold tracking-[0.18em] text-pond-700 uppercase">Einblicke</p>
-					<h2 class="mt-3 font-display text-4xl text-pond-950 sm:text-5xl">Projektbilder folgen.</h2>
-				</div>
-				<a class="font-semibold text-pond-700 hover:text-pond-900" href="/galerie/">Zur Galerie →</a>
+			<div class="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between" data-reveal>
+				<div><p class="eyebrow">Stimmung & Material</p><h2 class="mt-3 font-display text-4xl font-semibold text-pond-950 sm:text-5xl">So kann sich Ihre Wasserwelt anfühlen.</h2></div>
+				<a class="font-semibold text-pond-700 hover:text-pond-950" href="/galerie/">Zur Galerie →</a>
 			</div>
-			<div class="mt-10">
-				<GalleryGrid id={`detail-${offer.slug}`} count={3} compact />
-			</div>
+			<div class="mt-10"><GalleryGrid id={`detail-${offer.slug}`} count={3} compact items={detailVisuals} /></div>
 		</div>
 	</section>
 
 	<section class="bg-pond-800 text-white">
 		<div class="mx-auto flex max-w-[85rem] flex-col gap-8 px-4 py-16 sm:px-6 md:flex-row md:items-end md:justify-between md:py-20 lg:px-8">
-			<div>
-				<p class="text-sm font-bold tracking-[0.18em] text-sand-300 uppercase">Interesse an dieser Variante?</p>
-				<h2 class="mt-3 max-w-3xl font-display text-4xl leading-tight sm:text-5xl">Das Projekt kann später konkret besprochen werden.</h2>
-			</div>
-			<ButtonLink href="/kontakt/" variant="light" class="shrink-0">Kontakt aufnehmen</ButtonLink>
+			<div data-reveal><p class="text-xs font-bold tracking-[0.2em] text-sand-300 uppercase">Interesse an dieser Variante?</p><h2 class="mt-3 max-w-3xl font-display text-4xl font-semibold leading-tight sm:text-5xl">Lassen Sie uns prüfen, wie sie in Ihren Garten passt.</h2></div>
+			<ButtonLink href="/kontakt/" variant="light" class="shrink-0">Projekt anfragen</ButtonLink>
 		</div>
 	</section>
 </BaseLayout>

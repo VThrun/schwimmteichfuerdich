@@ -1,0 +1,55 @@
+<figure class="relative mx-auto w-full max-w-[32rem]" data-hero-video>
+	<div class="absolute -inset-3 rounded-t-[48%] rounded-b-[2.5rem] border border-pond-950/15 sm:-inset-5" aria-hidden="true"></div>
+	<div class="relative aspect-[4/5] overflow-hidden rounded-t-[48%] rounded-b-[2.5rem] border-4 border-white bg-pond-950 shadow-[0_30px_80px_rgba(16,38,28,0.24)]">
+		<video
+			class="h-full w-full object-cover"
+			poster="/media/hero-naturoase-poster.jpg"
+			muted
+			loop
+			playsinline
+			autoplay
+			preload="metadata"
+			aria-label="Atmosphärisches Stockvideo von dunklem Wasser, Holz und üppigem Grün"
+		>
+			<source src="/media/hero-naturoase.mp4" type="video/mp4" />
+		</video>
+		<div class="absolute inset-0 bg-gradient-to-t from-pond-950/35 via-transparent to-sand-50/5" aria-hidden="true"></div>
+		<button
+			type="button"
+			class="absolute bottom-4 right-4 grid size-11 place-items-center rounded-full border border-white/50 bg-pond-950/65 text-white backdrop-blur transition hover:bg-pond-950 focus-visible:ring-3 focus-visible:ring-sand-300 focus-visible:outline-hidden"
+			data-video-toggle
+			aria-label="Video pausieren"
+		>
+			<svg data-pause-icon class="size-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z" /></svg>
+			<svg data-play-icon class="hidden size-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m8 5 11 7-11 7z" /></svg>
+		</button>
+		<figcaption class="visual-label">Atmosphärisches Stockvideo</figcaption>
+	</div>
+</figure>
+
+<script>
+	const hero = document.querySelector<HTMLElement>('[data-hero-video]');
+	const video = hero?.querySelector('video');
+	const toggle = hero?.querySelector<HTMLButtonElement>('[data-video-toggle]');
+	const pauseIcon = hero?.querySelector<HTMLElement>('[data-pause-icon]');
+	const playIcon = hero?.querySelector<HTMLElement>('[data-play-icon]');
+	const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+	const updateState = (isPaused: boolean) => {
+		pauseIcon?.classList.toggle('hidden', isPaused);
+		playIcon?.classList.toggle('hidden', !isPaused);
+		if (toggle) toggle.ariaLabel = isPaused ? 'Video abspielen' : 'Video pausieren';
+	};
+
+	if (video && reducedMotion) {
+		video.pause();
+		updateState(true);
+	}
+
+	toggle?.addEventListener('click', () => {
+		if (!video) return;
+		if (video.paused) void video.play();
+		else video.pause();
+		updateState(!video.paused);
+	});
+</script>

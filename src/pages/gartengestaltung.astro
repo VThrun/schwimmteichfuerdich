@@ -1,0 +1,53 @@
+---
+import VisualImage from '../components/VisualImage.astro';
+import PageIntro from '../components/PageIntro.astro';
+import ButtonLink from '../components/ui/ButtonLink.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const services = [
+	{ number: '01', title: 'Terrassenbau', text: 'Warme Übergänge aus Holz verbinden Haus, Garten und Wasserfläche.' },
+	{ number: '02', title: 'Pflasterarbeiten', text: 'Wege und Flächen geben dem Garten Struktur, ohne die Naturwirkung zu verlieren.' },
+	{ number: '03', title: 'Mauerbau', text: 'Natursteinmauern schaffen Höhen, Sitzplätze und einen ruhigen Rahmen für Bepflanzung.' },
+];
+---
+
+<BaseLayout
+	title="Gartengestaltung"
+	description="Terrassenbau, Pflasterarbeiten und Mauerbau als stimmige Ergänzung rund um den Schwimmteich."
+>
+	<PageIntro
+		eyebrow="Rund um den Teich"
+		title="Der Garten hört nicht am Wasser auf."
+		text="Terrassen, Wege, Mauern und Pflanzflächen machen aus einem Schwimmteich eine vollständige Gartenoase – auf Wunsch gemeinsam geplant."
+	/>
+
+	<section class="mx-auto grid max-w-[85rem] gap-12 px-4 py-20 sm:px-6 md:py-28 lg:grid-cols-[1.08fr_0.92fr] lg:items-center lg:px-8">
+		<VisualImage visual="landscaping" class="aspect-[4/3] rounded-[2rem]" />
+		<div data-reveal>
+			<p class="eyebrow">Alles fügt sich zusammen</p>
+			<h2 class="mt-4 font-display text-5xl font-semibold leading-[0.95] text-pond-950 sm:text-6xl">Vom Wasser bis zur Terrasse als ein Gartenbild.</h2>
+			<p class="mt-6 text-lg leading-8 text-stone-600">Die schönste Wasserfläche wirkt erst durch ihr Umfeld. Deshalb können angrenzende Garten- und Landschaftsbauarbeiten von Anfang an mitgedacht werden – dezent, natürlich und passend zu Haus und Grundstück.</p>
+			<p class="mt-5 text-sm leading-6 text-stone-500">Konkrete Leistungsumfänge und Ausführungsdetails werden nach fachlicher Freigabe ergänzt.</p>
+		</div>
+	</section>
+
+	<section class="border-y border-stone-200 bg-white">
+		<div class="mx-auto max-w-[85rem] px-4 py-20 sm:px-6 md:py-28 lg:px-8">
+			<div class="max-w-3xl" data-reveal><p class="eyebrow">Subtil ergänzt</p><h2 class="mt-4 font-display text-5xl font-semibold leading-[0.95] text-pond-950 sm:text-6xl">Drei Bausteine rund um Ihre Wasserwelt.</h2></div>
+			<div class="mt-12 grid gap-5 lg:grid-cols-3">
+				{services.map((service, index) => (
+					<article class="rounded-[1.5rem] border border-stone-200 bg-stone-50 p-7" data-reveal style={`--reveal-delay: ${index * 70}ms`}>
+						<span class="text-xs font-bold text-sand-700">{service.number}</span><h3 class="mt-8 font-display text-3xl font-semibold text-pond-950">{service.title}</h3><p class="mt-4 leading-7 text-stone-600">{service.text}</p>
+					</article>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<section class="bg-pond-800 text-white">
+		<div class="mx-auto flex max-w-[85rem] flex-col gap-8 px-4 py-16 sm:px-6 md:flex-row md:items-end md:justify-between md:py-20 lg:px-8">
+			<div data-reveal><p class="text-xs font-bold tracking-[0.2em] text-sand-300 uppercase">Ein Garten. Eine Planung.</p><h2 class="mt-3 max-w-3xl font-display text-4xl font-semibold leading-tight sm:text-5xl">Lassen Sie uns das Umfeld gleich mitdenken.</h2></div>
+			<ButtonLink href="/kontakt/" variant="light" class="shrink-0">Gartengestaltung anfragen</ButtonLink>
+		</div>
+	</section>
+</BaseLayout>

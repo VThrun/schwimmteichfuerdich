@@ -1,17 +1,16 @@
 ---
+import { Image } from 'astro:assets';
+import { galleryVisuals, type SiteVisual } from '../data/media';
+
 interface Props {
 	id: string;
 	count?: number;
 	compact?: boolean;
+	items?: SiteVisual[];
 }
 
-const { id, count = 6, compact = false } = Astro.props;
-const variants = ['water', 'leaf', 'sand'] as const;
-const backgrounds = {
-	water: 'bg-pond-200',
-	leaf: 'bg-reed-200',
-	sand: 'bg-sand-200',
-};
+const { id, count = galleryVisuals.length, compact = false, items: suppliedItems } = Astro.props;
+const items = (suppliedItems ?? galleryVisuals).slice(0, count);
 const mosaicClasses = [
 	'col-span-2 row-span-2',
 	'col-span-1 row-span-1',
@@ -20,17 +19,7 @@ const mosaicClasses = [
 	'col-span-1 row-span-2',
 	'col-span-1 row-span-2',
 	'col-span-2 row-span-1',
-	'col-span-1 row-span-1',
-	'col-span-1 row-span-1',
-	'col-span-2 row-span-2',
-	'col-span-2 row-span-1',
-	'col-span-2 row-span-1',
 ];
-const items = Array.from({ length: count }, (_, index) => ({
-	index,
-	label: `Projektbild ${String(index + 1).padStart(2, '0')} wird ergänzt`,
-	variant: variants[index % variants.length],
-}));
 ---
 
 <div class="gallery" data-gallery={id}>
@@ -41,47 +30,47 @@ const items = Array.from({ length: count }, (_, index) => ({
 				: 'grid auto-rows-[8rem] grid-cols-2 gap-4 sm:auto-rows-[11rem] md:grid-cols-4 lg:auto-rows-[13rem]',
 		]}
 	>
-		{items.map((item) => (
+		{items.map((item, index) => (
 			<button
 				type="button"
 				class:list={[
-					'group relative isolate min-h-44 overflow-hidden rounded-2xl text-left transition duration-300 hover:-translate-y-1 hover:shadow-lg focus-visible:ring-3 focus-visible:ring-sand-400 focus-visible:outline-hidden',
-					backgrounds[item.variant],
-					compact ? 'aspect-[4/3]' : mosaicClasses[item.index % mosaicClasses.length],
+					'group relative isolate min-h-44 overflow-hidden rounded-[1.35rem] bg-pond-100 text-left transition duration-500 hover:-translate-y-1 hover:shadow-[0_22px_45px_rgba(16,38,28,0.18)] focus-visible:ring-3 focus-visible:ring-sand-400 focus-visible:outline-hidden',
+					compact ? 'aspect-[4/3]' : mosaicClasses[index % mosaicClasses.length],
 				]}
 				data-gallery-trigger
-				data-index={item.index}
-				data-variant={item.variant}
-				aria-label={`${item.label} groß anzeigen`}
+				data-index={index}
+				data-src={item.src.src}
+				data-alt={item.alt}
+				data-caption={item.caption}
+				aria-label={`${item.caption} groß anzeigen`}
 			>
-				<span class="absolute right-[10%] top-[10%] size-16 rounded-full bg-sand-50/70" aria-hidden="true"></span>
-				<span class="absolute -right-[20%] bottom-[24%] h-[34%] w-[105%] -rotate-6 rounded-[50%] bg-reed-500/80 transition duration-500 group-hover:-translate-y-1" aria-hidden="true"></span>
-				<span class="absolute bottom-0 left-[5%] right-[5%] h-[48%] rounded-[50%_50%_12%_12%] bg-gradient-to-br from-pond-300 to-pond-700" aria-hidden="true"></span>
-				<span class="absolute bottom-4 left-4 right-4 rounded-xl bg-white/85 px-3 py-2 text-xs font-bold tracking-wider text-pond-900 uppercase backdrop-blur-sm">
-					{item.label}
+				<Image
+					src={item.src}
+					alt={item.alt}
+					widths={[420, 700, 1000]}
+					sizes={compact ? '(min-width: 1024px) 30vw, (min-width: 640px) 48vw, 100vw' : '(min-width: 768px) 48vw, 100vw'}
+					class="h-full w-full object-cover transition duration-700 group-hover:scale-[1.035]"
+				/>
+				<span class="absolute inset-0 bg-gradient-to-t from-pond-950/55 via-transparent to-transparent" aria-hidden="true"></span>
+				<span class="absolute bottom-4 left-4 right-4 text-xs font-bold tracking-[0.08em] text-white uppercase">
+					{item.caption}
 				</span>
 			</button>
 		))}
 	</div>
 
 	<dialog
-		class="m-auto w-[min(92vw,64rem)] max-w-none overflow-hidden rounded-3xl bg-white p-0 text-stone-800 shadow-2xl backdrop:bg-pond-950/80"
+		class="m-auto w-[min(92vw,72rem)] max-w-none overflow-hidden rounded-[2rem] bg-white p-0 text-stone-800 shadow-2xl backdrop:bg-pond-950/85"
 		data-gallery-dialog
 		aria-labelledby={`${id}-dialog-title`}
 	>
-		<div class="relative">
-			<div
-				class="relative aspect-[16/10] overflow-hidden bg-pond-200 data-[variant=leaf]:bg-reed-200 data-[variant=sand]:bg-sand-200"
+		<div class="relative bg-pond-950">
+			<img
+				class="aspect-[16/10] w-full object-cover"
+				src={items[0]?.src.src}
+				alt={items[0]?.alt}
 				data-gallery-visual
-				data-variant="water"
-				role="img"
-				aria-label="Vergrößerter Bildplatzhalter"
-			>
-				<div class="absolute right-[12%] top-[12%] size-28 rounded-full bg-sand-50/70"></div>
-				<div class="absolute -right-[15%] bottom-[26%] h-[28%] w-[88%] -rotate-6 rounded-[50%] bg-reed-500/85"></div>
-				<div class="absolute bottom-[3%] left-[7%] right-[7%] h-[48%] rounded-[50%_50%_18%_22%] bg-gradient-to-br from-pond-300 to-pond-700"></div>
-				<div class="absolute -bottom-[13%] -left-[10%] h-[30%] w-[86%] rotate-6 rounded-[50%] bg-sand-300"></div>
-			</div>
+			/>
 
 			<form method="dialog" class="absolute right-4 top-4">
 				<button type="submit" class="flex size-11 items-center justify-center rounded-full bg-white/90 text-2xl text-pond-950 shadow-sm transition hover:bg-white" aria-label="Galerie schließen">×</button>
@@ -91,7 +80,7 @@ const items = Array.from({ length: count }, (_, index) => ({
 			<button type="button" class="absolute right-4 top-1/2 flex size-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-2xl text-pond-950 shadow-sm transition hover:bg-white" data-gallery-next aria-label="Nächstes Bild">→</button>
 		</div>
 		<div class="flex items-center justify-between gap-6 px-5 py-4 sm:px-7">
-			<h2 id={`${id}-dialog-title`} class="font-display text-xl text-pond-950" data-gallery-label aria-live="polite">Projektbild wird ergänzt</h2>
+			<h2 id={`${id}-dialog-title`} class="font-display text-xl font-semibold text-pond-950" data-gallery-label aria-live="polite">{items[0]?.caption}</h2>
 			<p class="shrink-0 text-sm font-semibold text-stone-500" data-gallery-counter></p>
 		</div>
 	</dialog>
@@ -107,7 +96,7 @@ const items = Array.from({ length: count }, (_, index) => ({
 			const dialog = gallery.querySelector<HTMLDialogElement>('[data-gallery-dialog]');
 			const label = gallery.querySelector<HTMLElement>('[data-gallery-label]');
 			const counter = gallery.querySelector<HTMLElement>('[data-gallery-counter]');
-			const visual = gallery.querySelector<HTMLElement>('[data-gallery-visual]');
+			const visual = gallery.querySelector<HTMLImageElement>('[data-gallery-visual]');
 			const previous = gallery.querySelector<HTMLButtonElement>('[data-gallery-previous]');
 			const next = gallery.querySelector<HTMLButtonElement>('[data-gallery-next]');
 
@@ -119,9 +108,10 @@ const items = Array.from({ length: count }, (_, index) => ({
 			const showItem = (index: number) => {
 				activeIndex = (index + triggers.length) % triggers.length;
 				const trigger = triggers[activeIndex];
-				label.textContent = trigger.querySelector('span:last-child')?.textContent?.trim() ?? 'Projektbild wird ergänzt';
+				label.textContent = trigger.dataset.caption ?? 'Visualisierung';
 				counter.textContent = `${activeIndex + 1} / ${triggers.length}`;
-				visual.dataset.variant = trigger.dataset.variant ?? 'water';
+				visual.src = trigger.dataset.src ?? '';
+				visual.alt = trigger.dataset.alt ?? '';
 			};
 
 			triggers.forEach((trigger, index) => {
@@ -145,9 +135,6 @@ const items = Array.from({ length: count }, (_, index) => ({
 		});
 	};
 
-	if (document.readyState === 'loading') {
-		document.addEventListener('DOMContentLoaded', initializeGalleries);
-	} else {
-		initializeGalleries();
-	}
+	if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initializeGalleries);
+	else initializeGalleries();
 </script>

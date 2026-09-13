@@ -1,53 +1,56 @@
 ---
-import MediaPlaceholder from '../components/MediaPlaceholder.astro';
+import VisualImage from '../components/VisualImage.astro';
 import PageIntro from '../components/PageIntro.astro';
 import ButtonLink from '../components/ui/ButtonLink.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const steps = [
-	'Aushub vorbereiten',
-	'Poolbecken erstellen',
-	'Teichrand ausbilden',
-	'Filtermaterial einbringen',
-	'Treppenstufen vorbereiten',
-	'Pflanzflächen zonieren',
-	'Bepflanzung einsetzen',
+	{ title: 'Projekt aufteilen', text: 'Vor dem Start wird gemeinsam festgelegt, welche Arbeiten Sie übernehmen möchten.' },
+	{ title: 'Gelände vorbereiten', text: 'Aushub und vorbereitende Arbeiten können je nach Grundstück in Eigenleistung erfolgen.' },
+	{ title: 'Fachbau absichern', text: 'Holzverbau, Abdichtung und Anschlüsse werden professionell umgesetzt.' },
+	{ title: 'Ufer gestalten', text: 'Randbereiche, Pflanzflächen und Übergänge zum Garten entstehen gemeinsam.' },
+	{ title: 'Selbst bepflanzen', text: 'Auch eigene geeignete Wasserpflanzen können Teil Ihrer persönlichen Gestaltung werden.' },
+	{ title: 'Wasser genießen', text: 'Nach Inbetriebnahme und Einweisung beginnt der schönste Teil: Ihr Garten wird zur Wasserwelt.' },
 ];
+
+const ownWork = ['Aushub und Erdbewegung', 'Gelände- und Randarbeiten', 'Pflanzflächen vorbereiten', 'Geeignete Wasserpflanzen einsetzen'];
+const professionalWork = ['Planung und technische Abstimmung', 'Holzverbau und Abdichtung', 'Anschlüsse und Systemkomponenten', 'Inbetriebnahme und Einweisung'];
 ---
 
 <BaseLayout
 	title="Do It Yourself"
-	description="Vorbereitetes Seitengerüst für den begleiteten Selbstbau eines Schwimmteichs oder Naturpools."
+	description="Beim Schwimmteichbau selbst mitarbeiten: Eigenleistungen transparent abstimmen und den finanziellen Rahmen aktiv mitgestalten."
 >
 	<PageIntro
 		eyebrow="Gemeinsam bauen"
-		title="Do It Yourself – mit einer klaren Aufgabenverteilung."
-		text="Diese Seite zeigt bereits den späteren Ablauf. Fachlich geprüfte Beschreibungen und Leistungsgrenzen werden nach der Inhaltsfreigabe ergänzt."
+		title="Selbst mitbauen. Sichtbar sparen."
+		text="Sie müssen Ihren Schwimmteich nicht komplett abgeben. Übernehmen Sie die Arbeiten, die zu Ihnen passen – mit einer klaren Aufgabenverteilung und fachlicher Begleitung."
 	/>
 
-	<section class="mx-auto grid max-w-[85rem] gap-12 px-4 pb-20 sm:px-6 md:grid-cols-2 md:items-center md:pb-28 lg:px-8">
-		<MediaPlaceholder label="Baustellenaufnahme wird ergänzt" variant="sand" shape="landscape" />
-		<div>
-			<p class="text-sm font-bold tracking-[0.18em] text-pond-700 uppercase">Selbst mitgestalten</p>
-			<h2 class="mt-4 font-display text-4xl leading-tight text-pond-950 sm:text-5xl">Eigenleistung und Facharbeit greifen ineinander.</h2>
-			<p class="mt-6 leading-7 text-stone-600">Hier folgt später die freigegebene Erklärung zum begleiteten Selbstbau. Der aktuelle Text dient ausschließlich als Platzhalter für Umfang und Lesefluss.</p>
+	<section class="mx-auto grid max-w-[85rem] gap-12 px-4 py-20 sm:px-6 md:py-28 lg:grid-cols-[1.08fr_0.92fr] lg:items-center lg:px-8">
+		<VisualImage visual="diy" class="aspect-[4/3] rounded-[2rem]" />
+		<div data-reveal>
+			<p class="eyebrow">Ihre Hände. Ihr Projekt.</p>
+			<h2 class="mt-4 font-display text-5xl font-semibold leading-[0.95] text-pond-950 sm:text-6xl">Eigenleistung ist kein Baupaket von der Stange.</h2>
+			<p class="mt-6 text-lg leading-8 text-stone-600">Je nach Erfahrung, Zeit und Grundstück entscheiden Sie, wo Sie selbst anpacken. So bleibt die fachlich sensible Konstruktion abgesichert, während Ihr eigener Anteil direkt sichtbar wird.</p>
+			<div class="mt-8 rounded-2xl border border-sand-300 bg-sand-50 p-6">
+				<strong class="font-display text-2xl text-pond-950">Was Sie davon haben</strong>
+				<p class="mt-2 leading-7 text-stone-600">Mehr Einfluss auf den Bau, eine persönliche Verbindung zum Ergebnis und die Möglichkeit, Kosten durch sinnvoll abgestimmte Eigenleistungen zu reduzieren.</p>
+			</div>
 		</div>
 	</section>
 
-	<section class="bg-white">
+	<section class="wood-grain text-white">
 		<div class="mx-auto max-w-[85rem] px-4 py-20 sm:px-6 md:py-28 lg:px-8">
-			<div class="max-w-3xl">
-				<p class="text-sm font-bold tracking-[0.18em] text-pond-700 uppercase">Möglicher Ablauf</p>
-				<h2 class="mt-4 font-display text-4xl leading-tight text-pond-950 sm:text-5xl">Schritt für Schritt zum eigenen Wasserprojekt.</h2>
+			<div class="max-w-3xl" data-reveal>
+				<p class="text-xs font-bold tracking-[0.2em] text-sand-300 uppercase">Ein möglicher Ablauf</p>
+				<h2 class="mt-4 font-display text-5xl font-semibold leading-[0.95] sm:text-6xl">Schritt für Schritt zur eigenen Wasserwelt.</h2>
 			</div>
-			<ol class="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+			<ol class="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
 				{steps.map((step, index) => (
-					<li class:list={['flex min-h-64 flex-col justify-between rounded-2xl border p-7', index === 0 ? 'border-pond-800 bg-pond-800 text-white' : 'border-stone-200 bg-stone-50 text-pond-950']}>
-						<span class:list={['text-xs font-bold', index === 0 ? 'text-sand-300' : 'text-pond-700']}>{String(index + 1).padStart(2, '0')}</span>
-						<div>
-							<h3 class="font-display text-3xl">{step}</h3>
-							<p class:list={['mt-4 leading-7', index === 0 ? 'text-pond-100' : 'text-stone-600']}>Die genaue Beschreibung dieses Bauabschnitts wird nach fachlicher Prüfung ergänzt.</p>
-						</div>
+					<li class="flex min-h-64 flex-col justify-between rounded-[1.5rem] border border-white/15 bg-white/10 p-7 backdrop-blur-sm" data-reveal style={`--reveal-delay: ${(index % 3) * 70}ms`}>
+						<span class="text-xs font-bold text-sand-300">{String(index + 1).padStart(2, '0')}</span>
+						<div><h3 class="font-display text-3xl font-semibold">{step.title}</h3><p class="mt-4 leading-7 text-sand-100">{step.text}</p></div>
 					</li>
 				))}
 			</ol>
@@ -55,27 +58,25 @@ const steps = [
 	</section>
 
 	<section class="mx-auto max-w-[85rem] px-4 py-20 sm:px-6 md:py-28 lg:px-8">
-		<div class="grid overflow-hidden rounded-3xl border border-stone-200 bg-white lg:grid-cols-2">
+		<div class="grid overflow-hidden rounded-[2rem] border border-stone-200 bg-white lg:grid-cols-2" data-reveal>
 			<article class="p-8 sm:p-10">
-				<p class="text-xs font-bold tracking-wider text-reed-700 uppercase">Mögliche Eigenleistungen</p>
-				<h2 class="mt-3 font-display text-3xl text-pond-950">Ihr Anteil am Projekt.</h2>
-				<p class="mt-5 leading-7 text-stone-600">Eine freigegebene Übersicht der möglichen Eigenleistungen wird an dieser Stelle ergänzt.</p>
+				<p class="eyebrow">Mögliche Eigenleistungen</p>
+				<h2 class="mt-3 font-display text-4xl font-semibold text-pond-950">Das können Sie übernehmen.</h2>
+				<ul class="mt-7 divide-y divide-stone-200 border-y border-stone-200">{ownWork.map((item) => <li class="flex gap-3 py-4 text-stone-700"><span class="text-sand-700" aria-hidden="true">✓</span>{item}</li>)}</ul>
 			</article>
 			<article class="border-t border-stone-200 bg-pond-50 p-8 sm:p-10 lg:border-l lg:border-t-0">
-				<p class="text-xs font-bold tracking-wider text-pond-700 uppercase">Leistungen des Fachbetriebs</p>
-				<h2 class="mt-3 font-display text-3xl text-pond-950">Professionelle Unterstützung.</h2>
-				<p class="mt-5 leading-7 text-stone-600">Die verbindliche Abgrenzung von Facharbeit, Beratung und Material folgt nach der Inhaltsfreigabe.</p>
+				<p class="eyebrow">Professionell begleitet</p>
+				<h2 class="mt-3 font-display text-4xl font-semibold text-pond-950">Das bleibt fachlich abgesichert.</h2>
+				<ul class="mt-7 divide-y divide-stone-200 border-y border-stone-200">{professionalWork.map((item) => <li class="flex gap-3 py-4 text-stone-700"><span class="text-pond-700" aria-hidden="true">✓</span>{item}</li>)}</ul>
 			</article>
 		</div>
+		<p class="mt-4 text-sm leading-6 text-stone-500">Welche Arbeiten tatsächlich geeignet sind, wird erst nach Prüfung des konkreten Projekts verbindlich festgelegt.</p>
 	</section>
 
 	<section class="bg-pond-800 text-white">
 		<div class="mx-auto flex max-w-[85rem] flex-col gap-8 px-4 py-16 sm:px-6 md:flex-row md:items-end md:justify-between md:py-20 lg:px-8">
-			<div>
-				<p class="text-sm font-bold tracking-[0.18em] text-sand-300 uppercase">Selbst bauen, begleitet planen</p>
-				<h2 class="mt-3 max-w-3xl font-display text-4xl leading-tight sm:text-5xl">Das passende Modell lässt sich gemeinsam auswählen.</h2>
-			</div>
-			<ButtonLink href="/kontakt/" variant="light" class="shrink-0">Projekt besprechen</ButtonLink>
+			<div data-reveal><p class="text-xs font-bold tracking-[0.2em] text-sand-300 uppercase">Wie viel möchten Sie selbst machen?</p><h2 class="mt-3 max-w-3xl font-display text-4xl font-semibold leading-tight sm:text-5xl">Finden wir gemeinsam die passende Arbeitsteilung.</h2></div>
+			<ButtonLink href="/kontakt/" variant="light" class="shrink-0">DIY-Projekt besprechen</ButtonLink>
 		</div>
 	</section>
 </BaseLayout>

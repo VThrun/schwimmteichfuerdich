@@ -1,0 +1,14 @@
+Hero stock video
+
+Title: Peaceful Poolside View Amidst Lush Greenery
+Creator: Gül Işık
+Source: https://www.pexels.com/video/peaceful-poolside-view-amidst-lush-greenery-29786803/
+License: https://www.pexels.com/license/
+Downloaded: 2026-09-13
+
+Project files:
+- public/media/hero-naturoase.mp4
+- public/media/hero-naturoase-poster.jpg
+
+Used as an atmospheric stock visual in the design draft. It is not presented as a
+completed customer project or reference work.

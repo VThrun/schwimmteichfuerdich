@@ -1,4 +1,6 @@
 ---
+import '@fontsource-variable/cormorant-garamond';
+import '@fontsource-variable/source-sans-3';
 import SiteFooter from '../components/SiteFooter.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import '../styles/global.css';
@@ -29,8 +31,9 @@ const pageTitle = title === 'Startseite'
 		<meta property="og:title" content={pageTitle} />
 		<meta property="og:description" content={description} />
 		<title>{pageTitle}</title>
+		<script is:inline>document.documentElement.classList.add('js');</script>
 	</head>
-	<body class="flex min-h-screen flex-col bg-stone-100 text-stone-800">
+	<body class="flex min-h-screen flex-col bg-stone-50 text-stone-800">
 		<a
 			href="#main-content"
 			class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-sand-300 focus:px-4 focus:py-2 focus:font-semibold focus:text-pond-950"
@@ -38,7 +41,7 @@ const pageTitle = title === 'Startseite'
 			Zum Inhalt springen
 		</a>
 		<SiteHeader />
-		<main id="main-content" class="grow pt-4">
+		<main id="main-content" class="grow">
 			<slot />
 		</main>
 		<SiteFooter />
@@ -55,6 +58,23 @@ const pageTitle = title === 'Startseite'
 				document.addEventListener('DOMContentLoaded', initPreline);
 			} else {
 				initPreline();
+			}
+
+			const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+			const revealItems = document.querySelectorAll<HTMLElement>('[data-reveal]');
+
+			if (reducedMotion || !('IntersectionObserver' in window)) {
+				revealItems.forEach((item) => item.dataset.revealed = 'true');
+			} else {
+				const observer = new IntersectionObserver((entries) => {
+					entries.forEach((entry) => {
+						if (!entry.isIntersecting) return;
+						(entry.target as HTMLElement).dataset.revealed = 'true';
+						observer.unobserve(entry.target);
+					});
+				}, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+
+				revealItems.forEach((item) => observer.observe(item));
 			}
 		</script>
 	</body>

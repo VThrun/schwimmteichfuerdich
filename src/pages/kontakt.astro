@@ -1,12 +1,13 @@
 ---
 import ContactForm from '../components/ContactForm.astro';
+import VisualImage from '../components/VisualImage.astro';
 import PageIntro from '../components/PageIntro.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout
 	title="Kontakt"
-	description="Nehmen Sie Kontakt auf und erzählen Sie uns von Ihrem geplanten Schwimmteich oder Naturpool."
+	description="Erzählen Sie uns von Ihrem geplanten Schwimmteich, Naturpool oder Ihrer Gartengestaltung."
 >
 	<PageIntro
 		eyebrow="Kontakt"
@@ -14,41 +15,20 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 		text="Ob erste Idee oder bereits konkreter Plan: Mit ein paar Angaben schaffen Sie eine gute Grundlage für das erste Gespräch."
 	/>
 
-	<section class="mx-auto grid max-w-[85rem] gap-12 px-4 pb-20 sm:px-6 md:pb-28 lg:grid-cols-[1.2fr_0.8fr] lg:px-8">
-		<div>
-			<h2 class="font-display text-3xl text-pond-950">Anfrage vorbereiten</h2>
-			<p class="mt-3 max-w-2xl leading-7 text-stone-600">
-				Das Formular ist vollständig gestaltet, versendet in dieser statischen Projektphase aber
-				noch keine Daten.
-			</p>
-			<div class="mt-7">
-				<ContactForm />
-			</div>
+	<section class="mx-auto grid max-w-[85rem] gap-12 px-4 py-20 sm:px-6 md:py-28 lg:grid-cols-[1.15fr_0.85fr] lg:px-8">
+		<div data-reveal>
+			<p class="eyebrow">Anfrage vorbereiten</p>
+			<h2 class="mt-3 font-display text-4xl font-semibold text-pond-950">Was schwebt Ihnen vor?</h2>
+			<p class="mt-4 max-w-2xl leading-7 text-stone-600">Ein Foto des Gartens, ungefähre Maße und Ihre Wünsche helfen später bei der ersten Einschätzung. Das Formular zeigt im aktuellen statischen Design bereits den geplanten Ablauf, versendet aber noch keine Daten.</p>
+			<div class="mt-8"><ContactForm /></div>
 		</div>
 
-		<aside class="lg:pt-12">
-			<div class="divide-y divide-stone-200 rounded-2xl border border-stone-200 bg-white">
-				<div class="p-6 sm:p-7">
-					<div class="flex size-11 items-center justify-center rounded-full bg-pond-100 text-pond-700" aria-hidden="true">
-						<svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4zM4 6l8 7 8-7"></path></svg>
-					</div>
-					<h2 class="mt-4 font-display text-2xl text-pond-950">E-Mail</h2>
-					<p class="mt-2 text-stone-600">Die bestätigte E-Mail-Adresse wird ergänzt.</p>
-				</div>
-				<div class="p-6 sm:p-7">
-					<div class="flex size-11 items-center justify-center rounded-full bg-reed-100 text-reed-700" aria-hidden="true">
-						<svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.4 1.8.6 2.8.7a2 2 0 0 1 1.7 2.1z"></path></svg>
-					</div>
-					<h2 class="mt-4 font-display text-2xl text-pond-950">Telefon</h2>
-					<p class="mt-2 text-stone-600">Die bestätigte Telefonnummer wird ergänzt.</p>
-				</div>
-				<div class="p-6 sm:p-7">
-					<div class="flex size-11 items-center justify-center rounded-full bg-sand-100 text-sand-700" aria-hidden="true">
-						<svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0z"></path><circle cx="12" cy="10" r="2"></circle></svg>
-					</div>
-					<h2 class="mt-4 font-display text-2xl text-pond-950">Einsatzgebiet</h2>
-					<p class="mt-2 text-stone-600">Region Leipzig – genaue Angabe in Prüfung.</p>
-				</div>
+		<aside class="space-y-5 lg:pt-12">
+			<VisualImage visual="evening" class="aspect-[4/3] rounded-[2rem]" imageClass="object-[58%_center]" />
+			<div class="divide-y divide-stone-200 overflow-hidden rounded-[1.5rem] border border-stone-200 bg-white">
+				<div class="p-6"><p class="eyebrow">E-Mail</p><p class="mt-2 text-stone-600">Die bestätigte E-Mail-Adresse wird ergänzt.</p></div>
+				<div class="p-6"><p class="eyebrow">Telefon</p><p class="mt-2 text-stone-600">Die bestätigte Telefonnummer wird ergänzt.</p></div>
+				<div class="p-6"><p class="eyebrow">Einsatzgebiet</p><p class="mt-2 text-stone-600">Region Leipzig – genaue Angabe in Prüfung.</p></div>
 			</div>
 		</aside>
 	</section>

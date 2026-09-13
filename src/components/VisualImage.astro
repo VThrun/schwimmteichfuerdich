@@ -1,0 +1,35 @@
+---
+import { Image } from 'astro:assets';
+import { visuals, type VisualKey } from '../data/media';
+
+interface Props {
+	visual: VisualKey;
+	class?: string;
+	imageClass?: string;
+	showCaption?: boolean;
+	eager?: boolean;
+	sizes?: string;
+}
+
+const {
+	visual,
+	class: className,
+	imageClass,
+	showCaption = true,
+	eager = false,
+	sizes = '(min-width: 1024px) 50vw, 100vw',
+} = Astro.props;
+const item = visuals[visual];
+---
+
+<figure class:list={['group relative isolate overflow-hidden bg-pond-100', className]}>
+	<Image
+		src={item.src}
+		alt={item.alt}
+		widths={[480, 768, 1100, 1600]}
+		sizes={sizes}
+		loading={eager ? 'eager' : 'lazy'}
+		class:list={['h-full w-full object-cover transition duration-700 group-hover:scale-[1.02]', imageClass]}
+	/>
+	{showCaption && <figcaption class="visual-label">{item.caption}</figcaption>}
+</figure>

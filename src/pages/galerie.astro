@@ -7,24 +7,25 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <BaseLayout
 	title="Galerie"
-	description="Vorbereitete Galerie für spätere Referenzbilder von Schwimmteichen und Naturpools."
+	description="Visualisierte Gartenideen für Schwimmteiche, Naturpools, Holzterrassen und naturnahe Uferbereiche."
 >
 	<PageIntro
-		eyebrow="Projekte & Eindrücke"
-		title="Wasserwelten, die später für sich sprechen."
-		text="Die Galerie zeigt bereits das responsive Gestaltungsraster. Freigegebene Projektbilder und Bildbeschreibungen werden später eingesetzt."
+		eyebrow="Stimmungen & Gartenideen"
+		title="Wasserwelten, die Lust auf den eigenen Garten machen."
+		text="Kompakt, großzügig, geradlinig oder ganz natürlich: Entdecken Sie, wie Wasser, Holz und lebendiges Grün zusammenspielen können."
 	/>
 
-	<section class="mx-auto max-w-[85rem] px-4 pb-20 sm:px-6 md:pb-28 lg:px-8">
-		<GalleryGrid id="project-gallery" count={12} />
+	<section class="mx-auto max-w-[85rem] px-4 py-20 sm:px-6 md:py-28 lg:px-8">
+		<div class="mb-10 flex flex-col gap-4 rounded-2xl border border-sand-300 bg-sand-50 p-5 text-sm leading-6 text-stone-600 sm:flex-row sm:items-center sm:justify-between" data-reveal>
+			<p><strong class="text-pond-950">Hinweis zur Bildwelt:</strong> Die gezeigten Motive sind KI-Visualisierungen zur Gestaltung und Inspiration, keine ausgeführten Referenzprojekte.</p>
+			<span class="shrink-0 font-bold tracking-[0.12em] text-sand-800 uppercase">7 Motive</span>
+		</div>
+		<GalleryGrid id="project-gallery" />
 	</section>
 
 	<section class="bg-pond-800 text-white">
 		<div class="mx-auto flex max-w-[85rem] flex-col gap-8 px-4 py-16 sm:px-6 md:flex-row md:items-end md:justify-between md:py-20 lg:px-8">
-			<div>
-				<p class="text-sm font-bold tracking-[0.18em] text-sand-300 uppercase">Eigene Idee im Kopf?</p>
-				<h2 class="mt-3 max-w-3xl font-display text-4xl leading-tight sm:text-5xl">Lassen Sie uns über den passenden Rahmen sprechen.</h2>
-			</div>
+			<div data-reveal><p class="text-xs font-bold tracking-[0.2em] text-sand-300 uppercase">Ihre eigene Idee</p><h2 class="mt-3 max-w-3xl font-display text-4xl font-semibold leading-tight sm:text-5xl">Welche Stimmung wünschen Sie sich für Ihren Garten?</h2></div>
 			<ButtonLink href="/kontakt/" variant="light" class="shrink-0">Projekt anfragen</ButtonLink>
 		</div>
 	</section>
